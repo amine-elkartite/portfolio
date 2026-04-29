@@ -17,7 +17,7 @@ export function Navbar() {
           </span>
           <span className="leading-none">
             <span className="block text-sm font-black uppercase text-white">Amine</span>
-            <span className="block text-xs font-medium text-white/58">SECUTRICK Founder</span>
+            <span className="block text-xs font-medium text-white/58">SECUTrick Founder</span>
           </span>
         </a>
 

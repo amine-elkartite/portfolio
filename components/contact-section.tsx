@@ -38,7 +38,7 @@ export function ContactSection() {
           </a>
           <p className="mt-6 leading-7 text-white/62">
             I am open to security assessments, modern web builds, startup collaborations, and
-            SECUTRICK partnership conversations.
+            SECUTrick partnership conversations.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">

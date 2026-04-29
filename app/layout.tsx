@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Amine ELKARTITE | Software & Cybersecurity Engineer",
+  title: "Amine ELKARTITE | Cybersecurity Engineer",
   description:
-    "High-end portfolio for Amine ELKARTITE, Software & Cybersecurity Engineer and Founder of SECUTRICK.",
+    "High-end portfolio for Amine ELKARTITE, Cybersecurity Engineer and Founder of SECUTrick.",
   icons: {
     icon: "/favicon.svg"
   }

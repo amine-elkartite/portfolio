@@ -8,7 +8,7 @@ import { socials } from "@/lib/site-data";
 
 const heroStats = [
   { label: "Security Focus", value: "100%" },
-{ label: "Founder Mode", value: "SECUTRICK" },
+  { label: "Founder Mode", value: "SECUTrick" },
   { label: "Core Domain", value: "Cyber" }
 ];
 
@@ -24,7 +24,7 @@ export function HeroSection() {
             className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.055] px-4 py-2 text-sm font-bold text-white/72 shadow-glow backdrop-blur"
           >
             <Sparkles size={16} className="text-neon-green" />
-            Software & Cybersecurity Engineer and Founder of SECUTRICK
+            Cybersecurity Engineer and Founder of SECUTrick
           </motion.p>
 
           <motion.h1
@@ -120,7 +120,7 @@ export function HeroSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050814] via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/10 bg-black/35 p-3 backdrop-blur-md">
                     <p className="text-sm font-black text-white">Amine ELKARTITE</p>
-                  <p className="text-xs text-white/60">Founder of SECUTRICK</p>
+                    <p className="text-xs text-white/60">Founder of SECUTrick</p>
                   </div>
                 </div>
 

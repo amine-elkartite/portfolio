@@ -17,9 +17,9 @@ export const socials = [
 
 export const projects = [
   {
-    title: "SECUTRICK Security Platform",
+    title: "SECUTrick Security Platform",
     type: "Cybersecurity Founder Project",
-    image: "/assets/project-secutrick.svg",
+    image: "/assets/project-secutrick.png",
     description:
       "Cloud-native website security concept with monitoring, posture scoring, incident support, and executive-grade reporting.",
     tags: ["Security", "SaaS", "Monitoring"]
@@ -27,7 +27,7 @@ export const projects = [
   {
     title: "TheWay Career AI",
     type: "AI Product Interface",
-    image: "/assets/project-theway.svg",
+    image: "/assets/project-theway.png",
     description:
       "A premium career-matching interface that analyzes CV data, ranks nearby opportunities, and presents calm decision support.",
     tags: ["AI", "Next.js", "UX"]
@@ -35,7 +35,7 @@ export const projects = [
   {
     title: "Offres Online",
     type: "Business Web Platform",
-    image: "/assets/project-offres.svg",
+    image: "/assets/project-offres.png",
     description:
       "Custom web presence for service discovery, hosting, and conversion-focused business pages with strong visual hierarchy.",
     tags: ["Web", "Hosting", "Brand"]
@@ -43,7 +43,7 @@ export const projects = [
   {
     title: "Klassy Cafe",
     type: "Hospitality Experience",
-    image: "/assets/project-klassy.svg",
+    image: "/assets/project-klassy.png",
     description:
       "Restaurant landing experience with polished navigation, reservation flow, strong imagery, and elegant visual rhythm.",
     tags: ["Landing", "Motion", "Design"]

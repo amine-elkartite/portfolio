@@ -7,13 +7,13 @@ import { SectionHeading } from "@/components/section-heading";
 const cards = [
   {
     icon: ShieldCheck,
-    title: "Software & Cybersecurity Engineering",
+    title: "Cybersecurity Engineering",
     text: "Security-first thinking across web applications, infrastructure posture, attack surface review, and practical hardening."
   },
   {
     icon: Rocket,
     title: "Founder Execution",
-    text: "SECUTRICK is built around clear positioning, trust, rapid iteration, and services that solve visible business risk."
+    text: "SECUTrick is built around clear positioning, trust, rapid iteration, and services that solve visible business risk."
   },
   {
     icon: Code2,
