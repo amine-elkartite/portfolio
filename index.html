@@ -12,7 +12,7 @@
 
 <meta name="description" content="Official profile of Amine ELKARTITE, Full Stack Developer, Cyber Security Specialist and Founder of SECUTrick based in Morocco.">
 
-<link rel="canonical" href="https://TON-DOMAINE.com/amine-elkartite">
+<link rel="canonical" href="https://amineelkartite.netlify.app/amine-elkartite">
 
 <script type="application/ld+json">
 {
@@ -30,7 +30,7 @@
     "name": "SECUTrick",
     "url": "https://secutrick.net"
   },
-  "url": "https://TON-DOMAINE.com/amine-elkartite",
+  "url": "https://amineelkartite.netlify.app/amine-elkartite",
   "sameAs": [
     "https://www.linkedin.com/in/amine-elkartite-7b4bb8323/",
     "https://github.com/amine-elkartite",
@@ -58,6 +58,7 @@
         <a href="#projects">Projects</a>
         <a href="#stack">Stack</a>
         <a href="#repositories">Repos</a>
+        <a href="#socials">Socials</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -89,6 +90,7 @@
           <a href="#projects">Projects</a>
           <a href="#stack">Stack</a>
           <a href="#repositories">Repos</a>
+          <a href="#socials">Socials</a>
           <a href="#services">Services</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -248,9 +250,9 @@
         </div>
 
         <div class="hero-metrics reveal" aria-label="Statistiques professionnelles">
-          <span><strong>12</strong> repositories</span>
-          <span><strong>86</strong> contributions</span>
-          <span><strong>01</strong> founder project</span>
+          <span><strong id="githubReposCount">--</strong> repositories</span>
+          <span><strong id="githubFollowersCount">--</strong> followers</span>
+          <span><strong id="githubFollowingCount">--</strong> following</span>
           <span><strong>24/7</strong> security vision</span>
         </div>
       </section>
@@ -523,13 +525,56 @@
           <h2 id="repositories-title">Public work across security, apps and web builds.</h2>
         </div>
 
-        <div class="repo-grid reveal">
-          <article><span>HTML</span><h3>bike-craft</h3></article>
-          <article><span>HTML</span><h3>ay-shop</h3></article>
-          <article><span>HTML</span><h3>GestionEmploiOFPPT</h3></article>
-          <article><span>JavaScript</span><h3>gestionRestaurant</h3></article>
-          <article><span>Product</span><h3>TheWay</h3></article>
-          <article><span>Profile</span><h3>amine-elkartite</h3></article>
+        <div class="repo-grid reveal" id="githubRepos">
+          <article class="github-repo-card">
+            <span>Loading...</span>
+            <h3>GitHub repositories</h3>
+            <p>Loading latest public repositories from GitHub...</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="social-dynamic-section section-shell" id="socials" aria-labelledby="socials-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Social presence</p>
+          <h2 id="socials-title">Follow my work on X and LinkedIn.</h2>
+          <p>Latest updates, cybersecurity content, portfolio progress and SECUTrick announcements.</p>
+        </div>
+
+        <div class="social-dynamic-grid reveal">
+          <article class="social-dynamic-card">
+            <div class="social-dynamic-head">
+              <span>X / Twitter</span>
+              <strong id="xUsername">@Amine_Elkartite</strong>
+            </div>
+            <p id="xDescription">Cybersecurity, web development, SECUTrick updates and personal branding.</p>
+            <div id="xTimeline" class="x-timeline-box">
+              <a class="twitter-timeline" data-height="420" data-theme="dark" href="https://x.com/Amine_Elkartite">Posts by Amine ELKARTITE</a>
+            </div>
+            <a class="social-dynamic-button" id="xProfileLink" href="https://x.com/Amine_Elkartite" target="_blank" rel="noreferrer">View X profile</a>
+          </article>
+
+          <article class="social-dynamic-card">
+            <div class="social-dynamic-head">
+              <span>LinkedIn</span>
+              <strong id="linkedinName">Amine ELKARTITE</strong>
+            </div>
+            <p id="linkedinDescription">Full Stack Developer | React / JavaScript / PHP | Cybersecurity | Secure applications.</p>
+            <div class="linkedin-preview">
+              <div class="linkedin-avatar">
+                <img src="assets/avatars/linkedIn-removebg-preview.png" alt="Amine ELKARTITE profile" />
+              </div>
+              <div>
+                <h3>Amine ELKARTITE</h3>
+                <p>Cyber Security Specialist · Founder @ SECUTrick</p>
+                <span>Morocco · Hybrid / Remote</span>
+              </div>
+            </div>
+            <div class="linkedin-actions">
+              <a class="social-dynamic-button" id="linkedinProfileLink" href="https://www.linkedin.com/in/amine-elkartite-7b4bb8323/" target="_blank" rel="noreferrer">View LinkedIn profile</a>
+              <a class="social-dynamic-button social-dynamic-button--ghost" id="linkedinConnectLink" href="https://www.linkedin.com/in/amine-elkartite-7b4bb8323/" target="_blank" rel="noreferrer">Connect</a>
+            </div>
+          </article>
         </div>
       </section>
 
