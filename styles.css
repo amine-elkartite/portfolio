@@ -1491,20 +1491,70 @@ button {
 
 
 /* =========================
-   X / Twitter Timeline Fix
+   X / Twitter Profile Card
 ========================= */
 
 .x-timeline-box {
-  overflow: hidden;
-  min-height: 420px;
-  margin-bottom: 18px;
-  border-radius: var(--radius);
-  background: #f3f3f3;
+  display: none;
+}
+
+.x-profile-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 180px;
+  padding: 22px;
+  margin: 18px 0;
+  background: #f7f7f7;
   border: 1px solid var(--line);
 }
 
-.x-timeline-box iframe {
-  width: 100% !important;
-  min-height: 420px !important;
-  border: 0 !important;
+.x-profile-avatar {
+  width: 78px;
+  height: 78px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--accent);
+}
+
+.x-profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.x-profile-info h3 {
+  margin: 0 0 5px;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.x-profile-info span {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.x-profile-info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 560px) {
+  .x-profile-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .x-profile-avatar {
+    width: 72px;
+    height: 72px;
+  }
 }

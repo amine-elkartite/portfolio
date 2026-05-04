@@ -22,10 +22,13 @@ const CONFIG = {
     reposLimit: 6,
   },
   x: {
+    name: "Amine ELKARTITE",
     username: "Amine_Elkartite",
     displayUsername: "@Amine_Elkartite",
     url: "https://x.com/Amine_Elkartite",
-    description: "Cybersecurity, web development, SECUTrick updates and personal branding.",
+    avatar: "assets/avatars/linkedIn-removebg-preview.png",
+    description:
+      "Cybersecurity, web development, SECUTrick updates and personal branding.",
   },
   linkedin: {
     name: "Amine ELKARTITE",
@@ -391,61 +394,18 @@ function loadDynamicSocialProfiles() {
 }
 
 function loadXProfile() {
+  setText("#xName", CONFIG.x.name);
   setText("#xUsername", CONFIG.x.displayUsername);
+  setText("#xHandle", CONFIG.x.displayUsername);
   setText("#xDescription", CONFIG.x.description);
   setHref("#xProfileLink", CONFIG.x.url);
 
-  const xTimeline = document.getElementById("xTimeline");
+  const xAvatar = document.getElementById("xAvatar");
 
-  if (!xTimeline) return;
-
-  xTimeline.innerHTML = `
-    <a
-      class="twitter-timeline"
-      data-height="420"
-      data-theme="light"
-      data-chrome="noheader nofooter noborders transparent"
-      href="https://twitter.com/${CONFIG.x.username}?ref_src=twsrc%5Etfw"
-    >
-      Posts by ${CONFIG.x.displayUsername}
-    </a>
-  `;
-
-  loadXWidgetScript();
-}
-
-function loadXWidgetScript() {
-  const xTimeline = document.getElementById("xTimeline");
-
-  function renderTimeline() {
-    if (window.twttr && window.twttr.widgets && xTimeline) {
-      window.twttr.widgets.load(xTimeline);
-    }
+  if (xAvatar) {
+    xAvatar.src = CONFIG.x.avatar;
+    xAvatar.alt = `${CONFIG.x.name} X profile`;
   }
-
-  const existingScript = document.querySelector(
-    'script[src="https://platform.twitter.com/widgets.js"]'
-  );
-
-  if (existingScript) {
-    if (window.twttr && window.twttr.widgets) {
-      renderTimeline();
-    } else {
-      existingScript.addEventListener("load", renderTimeline, { once: true });
-      setTimeout(renderTimeline, 1200);
-      setTimeout(renderTimeline, 2500);
-    }
-
-    return;
-  }
-
-  const script = document.createElement("script");
-  script.src = "https://platform.twitter.com/widgets.js";
-  script.async = true;
-  script.charset = "utf-8";
-  script.onload = renderTimeline;
-
-  document.body.appendChild(script);
 }
 
 function loadLinkedInProfile() {
