@@ -21,26 +21,16 @@ const CONFIG = {
     username: "amine-elkartite",
     reposLimit: 6,
   },
-
   x: {
     username: "Amine_Elkartite",
     displayUsername: "@Amine_Elkartite",
-
-    // Lien public du bouton
     url: "https://x.com/Amine_Elkartite",
-
-    // Lien utilisé pour le widget officiel X/Twitter
-    embedUrl: "https://twitter.com/Amine_Elkartite",
-
-    description:
-      "Cybersecurity, web development, SECUTrick updates and personal branding.",
+    description: "Cybersecurity, web development, SECUTrick updates and personal branding.",
   },
-
   linkedin: {
     name: "Amine ELKARTITE",
     url: "https://www.linkedin.com/in/amine-elkartite-7b4bb8323/",
-    description:
-      "Full Stack Developer | React / JavaScript / PHP | Cybersecurity | Secure applications.",
+    description: "Full Stack Developer | React / JavaScript / PHP | Cybersecurity | Secure applications.",
     headline: "Cyber Security Specialist · Founder @ SECUTrick",
     location: "Morocco · Hybrid / Remote",
     avatar: "assets/avatars/linkedIn-removebg-preview.png",
@@ -76,18 +66,12 @@ function formatDate(dateString) {
 
 function setText(selector, value) {
   const element = document.querySelector(selector);
-
-  if (element) {
-    element.textContent = value;
-  }
+  if (element) element.textContent = value;
 }
 
 function setHref(selector, value) {
   const element = document.querySelector(selector);
-
-  if (element) {
-    element.href = value;
-  }
+  if (element) element.href = value;
 }
 
 /* =========================
@@ -106,8 +90,7 @@ function updateProgress() {
   if (!progress) return;
 
   const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  const progressValue =
-    scrollable <= 0 ? 0 : (window.scrollY / scrollable) * 100;
+  const progressValue = scrollable <= 0 ? 0 : (window.scrollY / scrollable) * 100;
 
   progress.style.width = `${progressValue}%`;
 
@@ -123,10 +106,7 @@ updateProgress();
 
 if (backToTopButton) {
   backToTopButton.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
 
@@ -166,15 +146,11 @@ if (menuClose) {
   menuClose.addEventListener("click", closeMenu);
 }
 
-menuLinks.forEach((link) => {
-  link.addEventListener("click", closeMenu);
-});
+menuLinks.forEach((link) => link.addEventListener("click", closeMenu));
 
 if (menuPanel) {
   menuPanel.addEventListener("click", (event) => {
-    if (event.target === menuPanel) {
-      closeMenu();
-    }
+    if (event.target === menuPanel) closeMenu();
   });
 }
 
@@ -199,9 +175,7 @@ if ("IntersectionObserver" in window) {
         }
       });
     },
-    {
-      threshold: 0.16,
-    }
+    { threshold: 0.16 }
   );
 
   revealItems.forEach((item) => revealObserver.observe(item));
@@ -257,17 +231,9 @@ function openProject(card) {
     .map((tag) => tag.trim())
     .filter(Boolean);
 
-  if (dialogTitle) {
-    dialogTitle.textContent = card.dataset.project || "Project";
-  }
-
-  if (dialogType) {
-    dialogType.textContent = card.dataset.type || "Project";
-  }
-
-  if (dialogDesc) {
-    dialogDesc.textContent = card.dataset.desc || "";
-  }
+  if (dialogTitle) dialogTitle.textContent = card.dataset.project || "Project";
+  if (dialogType) dialogType.textContent = card.dataset.type || "Project";
+  if (dialogDesc) dialogDesc.textContent = card.dataset.desc || "";
 
   if (dialogImage) {
     dialogImage.src = card.dataset.image || "";
@@ -310,9 +276,7 @@ if (projectDialog) {
   }
 
   projectDialog.addEventListener("click", (event) => {
-    if (event.target === projectDialog) {
-      closeProject();
-    }
+    if (event.target === projectDialog) closeProject();
   });
 }
 
@@ -327,9 +291,7 @@ const githubFollowingCount = document.getElementById("githubFollowingCount");
 
 async function loadGitHubProfile() {
   try {
-    const response = await fetch(
-      `https://api.github.com/users/${CONFIG.github.username}`
-    );
+    const response = await fetch(`https://api.github.com/users/${CONFIG.github.username}`);
 
     if (!response.ok) {
       throw new Error(`GitHub profile error: ${response.status}`);
@@ -337,17 +299,9 @@ async function loadGitHubProfile() {
 
     const profile = await response.json();
 
-    if (githubReposCount) {
-      githubReposCount.textContent = profile.public_repos ?? "--";
-    }
-
-    if (githubFollowersCount) {
-      githubFollowersCount.textContent = profile.followers ?? "--";
-    }
-
-    if (githubFollowingCount) {
-      githubFollowingCount.textContent = profile.following ?? "--";
-    }
+    if (githubReposCount) githubReposCount.textContent = profile.public_repos ?? "--";
+    if (githubFollowersCount) githubFollowersCount.textContent = profile.followers ?? "--";
+    if (githubFollowingCount) githubFollowingCount.textContent = profile.following ?? "--";
   } catch (error) {
     console.error(error);
 
@@ -403,11 +357,9 @@ async function loadGitHubRepos() {
 
 function createRepoCard(repo) {
   const language = repo.language || "Project";
-
   const description =
     repo.description ||
     "Repository public créé par Amine ELKARTITE autour du web, du développement ou de la cybersécurité.";
-
   const updatedDate = formatDate(repo.updated_at);
 
   return `
@@ -445,25 +397,31 @@ function loadXProfile() {
 
   const xTimeline = document.getElementById("xTimeline");
 
-  if (xTimeline) {
-    xTimeline.innerHTML = `
-      <a
-        class="twitter-timeline"
-        data-height="420"
-        data-theme="light"
-        data-chrome="noheader nofooter noborders transparent"
-        href="${CONFIG.x.embedUrl}"
-      >
-        Posts by ${CONFIG.x.displayUsername}
-      </a>
-    `;
+  if (!xTimeline) return;
 
-    loadXWidgetScript();
-  }
+  xTimeline.innerHTML = `
+    <a
+      class="twitter-timeline"
+      data-height="420"
+      data-theme="light"
+      data-chrome="noheader nofooter noborders transparent"
+      href="https://twitter.com/${CONFIG.x.username}?ref_src=twsrc%5Etfw"
+    >
+      Posts by ${CONFIG.x.displayUsername}
+    </a>
+  `;
+
+  loadXWidgetScript();
 }
 
 function loadXWidgetScript() {
   const xTimeline = document.getElementById("xTimeline");
+
+  function renderTimeline() {
+    if (window.twttr && window.twttr.widgets && xTimeline) {
+      window.twttr.widgets.load(xTimeline);
+    }
+  }
 
   const existingScript = document.querySelector(
     'script[src="https://platform.twitter.com/widgets.js"]'
@@ -471,7 +429,11 @@ function loadXWidgetScript() {
 
   if (existingScript) {
     if (window.twttr && window.twttr.widgets) {
-      window.twttr.widgets.load(xTimeline);
+      renderTimeline();
+    } else {
+      existingScript.addEventListener("load", renderTimeline, { once: true });
+      setTimeout(renderTimeline, 1200);
+      setTimeout(renderTimeline, 2500);
     }
 
     return;
@@ -481,12 +443,7 @@ function loadXWidgetScript() {
   script.src = "https://platform.twitter.com/widgets.js";
   script.async = true;
   script.charset = "utf-8";
-
-  script.onload = () => {
-    if (window.twttr && window.twttr.widgets) {
-      window.twttr.widgets.load(xTimeline);
-    }
-  };
+  script.onload = renderTimeline;
 
   document.body.appendChild(script);
 }
