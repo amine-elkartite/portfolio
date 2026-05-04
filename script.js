@@ -357,7 +357,9 @@ async function loadGitHubRepos() {
 
 function createRepoCard(repo) {
   const language = repo.language || "Project";
-  const description = repo.description || "Public GitHub repository by Amine ELKARTITE.";
+  const description =
+    repo.description ||
+    "Repository public créé par Amine ELKARTITE autour du web, du développement ou de la cybersécurité.";
   const updatedDate = formatDate(repo.updated_at);
 
   return `
@@ -369,7 +371,7 @@ function createRepoCard(repo) {
       <div class="repo-meta">
         <small>★ ${repo.stargazers_count}</small>
         <small>⑂ ${repo.forks_count}</small>
-        <small>Updated ${updatedDate}</small>
+        <small>${updatedDate}</small>
       </div>
 
       <a href="${repo.html_url}" target="_blank" rel="noreferrer">

@@ -1725,3 +1725,238 @@ button {
     height: 74px;
   }
 }
+
+/* =========================
+   FINAL FIX: GitHub cards + Social section style
+   Match the white / black / orange portfolio design
+========================= */
+
+.github-repo-card {
+  display: grid;
+  align-content: start;
+  min-height: 190px;
+}
+
+.github-repo-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.repo-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.repo-meta small {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.github-repo-card a {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 18px;
+  color: #00a9e8;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.github-repo-card a:hover,
+.github-repo-card a:focus-visible {
+  color: var(--accent);
+  outline: 0;
+}
+
+.social-dynamic-section {
+  padding: 76px 0;
+}
+
+.social-dynamic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.social-dynamic-card {
+  display: grid;
+  align-content: start;
+  min-height: 430px;
+  padding: 32px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  backdrop-filter: none;
+}
+
+.social-dynamic-card::before {
+  display: none;
+}
+
+.social-dynamic-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.social-dynamic-head span {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.social-dynamic-head strong {
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 900;
+}
+
+.social-dynamic-card > p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.x-timeline-box {
+  overflow: hidden;
+  min-height: 300px;
+  margin-bottom: 18px;
+  border-radius: var(--radius);
+  background: #f3f3f3;
+  border: 1px solid var(--line);
+}
+
+.linkedin-preview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 160px;
+  padding: 22px;
+  margin: 18px 0;
+  border-radius: var(--radius);
+  background: #f7f7f7;
+  border: 1px solid var(--line);
+}
+
+.linkedin-avatar {
+  width: 78px;
+  height: 78px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--accent);
+}
+
+.linkedin-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.linkedin-preview h3 {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.linkedin-preview p {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.linkedin-preview span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.linkedin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.social-dynamic-button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #111111;
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: none;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.social-dynamic-button:hover,
+.social-dynamic-button:focus-visible {
+  background: #ffb32b;
+  color: #111111;
+  outline: 0;
+  transform: translateY(-2px);
+}
+
+.social-dynamic-button--ghost {
+  background: #111111;
+  color: #ffffff;
+  border: 0;
+}
+
+.social-dynamic-button--ghost:hover,
+.social-dynamic-button--ghost:focus-visible {
+  background: var(--accent);
+  color: #111111;
+}
+
+@media (max-width: 900px) {
+  .social-dynamic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .linkedin-preview {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .social-dynamic-card {
+    min-height: auto;
+    padding: 24px;
+  }
+
+  .social-dynamic-head {
+    flex-direction: column;
+  }
+
+  .linkedin-preview {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
