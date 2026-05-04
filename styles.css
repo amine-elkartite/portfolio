@@ -1181,6 +1181,96 @@ button {
   line-height: 1.65;
 }
 
+.x-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+}
+
+.x-metrics li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  background: #fbfbfb;
+  border: 1px solid var(--line);
+}
+
+.x-metrics strong {
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+
+.x-metrics span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.x-tweets {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 24px;
+}
+
+.x-tweets-status {
+  margin: 0;
+  padding: 14px 16px;
+  background: #fbfbfb;
+  border: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+.x-tweet {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  background: #fbfbfb;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.x-tweet:hover,
+.x-tweet:focus-visible {
+  border-color: var(--accent);
+  background: #ffffff;
+}
+
+.x-tweet-text {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.x-tweet-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 /* LinkedIn Card */
 
 .linkedin-preview {

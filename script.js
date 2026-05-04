@@ -406,6 +406,107 @@ function loadXProfile() {
     xAvatar.src = CONFIG.x.avatar;
     xAvatar.alt = `${CONFIG.x.name} X profile`;
   }
+
+  hydrateXProfileFromAPI();
+}
+
+async function hydrateXProfileFromAPI() {
+  const status = document.getElementById("xTweetsStatus");
+  const tweetsContainer = document.getElementById("xTweets");
+  const metrics = document.getElementById("xMetrics");
+
+  try {
+    const response = await fetch(
+      `/api/x-profile?username=${encodeURIComponent(CONFIG.x.username)}&tweets=5`,
+      { headers: { Accept: "application/json" } }
+    );
+
+    if (!response.ok) {
+      throw new Error(`x-profile error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const user = data?.user;
+
+    if (!user) throw new Error("Empty X payload");
+
+    setText("#xName", user.name || CONFIG.x.name);
+    setText("#xHandle", `@${user.username}`);
+    setText("#xUsername", `@${user.username}`);
+
+    if (user.description) {
+      setText("#xDescription", user.description);
+    }
+
+    setHref("#xProfileLink", user.url || CONFIG.x.url);
+
+    const xAvatar = document.getElementById("xAvatar");
+    if (xAvatar && user.avatar) {
+      xAvatar.src = user.avatar;
+      xAvatar.alt = `${user.name || CONFIG.x.name} X profile`;
+    }
+
+    if (metrics && user.metrics) {
+      setText("#xFollowers", formatCount(user.metrics.followers_count));
+      setText("#xFollowing", formatCount(user.metrics.following_count));
+      setText("#xTweetCount", formatCount(user.metrics.tweet_count));
+      metrics.hidden = false;
+    }
+
+    renderXTweets(data.tweets || [], user.username);
+  } catch (error) {
+    console.error("Live X data unavailable, falling back to defaults", error);
+
+    if (tweetsContainer) {
+      tweetsContainer.innerHTML = "";
+      if (status) {
+        status.textContent = "Live X data is unavailable right now. Visit the profile for the latest posts.";
+        tweetsContainer.appendChild(status);
+      }
+    }
+  }
+}
+
+function renderXTweets(tweets, username) {
+  const container = document.getElementById("xTweets");
+  if (!container) return;
+
+  if (!tweets.length) {
+    container.innerHTML = `
+      <p class="x-tweets-status">No recent posts available right now.</p>
+    `;
+    return;
+  }
+
+  container.innerHTML = tweets
+    .map((tweet) => {
+      const url = tweet.url || `https://x.com/${username}/status/${tweet.id}`;
+      const date = formatDate(tweet.createdAt);
+      const likes = tweet.metrics?.like_count ?? 0;
+      const replies = tweet.metrics?.reply_count ?? 0;
+      const reposts = tweet.metrics?.retweet_count ?? 0;
+
+      return `
+        <a class="x-tweet" href="${escapeHTML(url)}" target="_blank" rel="noreferrer">
+          <p class="x-tweet-text">${escapeHTML(tweet.text || "")}</p>
+          <div class="x-tweet-meta">
+            <span>${escapeHTML(date)}</span>
+            <span>♥ ${formatCount(likes)}</span>
+            <span>↺ ${formatCount(reposts)}</span>
+            <span>↩ ${formatCount(replies)}</span>
+          </div>
+        </a>
+      `;
+    })
+    .join("");
+}
+
+function formatCount(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "--";
+  if (number >= 1_000_000) return `${(number / 1_000_000).toFixed(1)}M`;
+  if (number >= 1_000) return `${(number / 1_000).toFixed(1)}K`;
+  return String(number);
 }
 
 function loadLinkedInProfile() {
