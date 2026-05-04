@@ -1214,6 +1214,20 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+.x-timeline-box {
+  overflow: hidden;
+  min-height: 420px;
+  margin-bottom: 18px;
+  border-radius: var(--radius);
+  background: #f3f3f3;
+  border: 1px solid var(--line);
+}
+
+.x-timeline-box iframe {
+  width: 100% !important;
+  min-height: 420px !important;
+}
+
 @media (max-width: 900px) {
   .social-dynamic-grid {
     grid-template-columns: 1fr;
