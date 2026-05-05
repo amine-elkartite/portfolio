@@ -32,7 +32,7 @@ const CONFIG = {
   },
   linkedin: {
     name: "Amine ELKARTITE",
-    url: "https://www.linkedin.com/in/amine-elkartite-7b4bb8323/",
+    url: "https://www.linkedin.com/in/amine-elkartite/",
     description: "Full Stack Developer | React / JavaScript / PHP | Cybersecurity | Secure applications.",
     headline: "Cyber Security Specialist · Founder @ SECUTrick",
     location: "Morocco · Hybrid / Remote",
