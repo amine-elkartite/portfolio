@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr">
-  <head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -18,6 +18,7 @@
 
   <meta name="author" content="Amine ELKARTITE" />
   <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0b0f14" />
 
   <link rel="canonical" href="https://amine-elkartite.vercel.app/" />
   <link rel="icon" href="assets/avatars/linkedIn-removebg-preview.png" />
@@ -35,6 +36,7 @@
   />
   <meta property="og:url" content="https://amine-elkartite.vercel.app/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Amine ELKARTITE Portfolio" />
   <meta property="og:image" content="https://amine-elkartite.vercel.app/assets/avatars/linkedIn-removebg-preview.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
@@ -44,20 +46,26 @@
     content="Founder of SECUTRICK, Cyber Security Specialist and Full Stack Developer focused on secure web applications."
   />
   <meta name="twitter:image" content="https://amine-elkartite.vercel.app/assets/avatars/linkedIn-removebg-preview.png" />
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Amine ELKARTITE",
     "alternateName": [
-      "Amine ELKARTITE",
-      "amineELKARTITE",
+      "Amine Elkartite",
+      "amineelkartite",
       "Amine Z"
     ],
     "url": "https://amine-elkartite.vercel.app/",
-    "image": "https://amine-elkartite.vercel.app/assets/avatars/linkedIn-removebg-preview.png"
+    "image": "https://amine-elkartite.vercel.app/assets/avatars/linkedIn-removebg-preview.png",
     "jobTitle": "Founder of SECUTRICK, Cyber Security Specialist and Full Stack Developer",
     "description": "Amine ELKARTITE is the Founder of SECUTRICK, a Cyber Security Specialist and Full Stack Developer focused on secure web applications, vulnerability detection and web security.",
+    "email": "mailto:aminezth022@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "MA"
+    },
     "worksFor": {
       "@type": "Organization",
       "name": "SECUTRICK",
@@ -75,16 +83,49 @@
 
   <link rel="stylesheet" href="styles.css" />
 </head>
-  <body>
-    <div class="scroll-progress" aria-hidden="true"></div>
 
-    <header class="site-header" id="top">
-      <a class="brand" href="#home" aria-label="Retour a l'accueil">
-        <span>Amine</span>
-        <strong>ELKARTITE</strong>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="#home" aria-label="Retour à l'accueil">
+      <span>Amine</span>
+      <strong>ELKARTITE</strong>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Navigation principale">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#secutrick">SECUTRICK</a>
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#repositories">Repos</a>
+      <a href="#socials">Socials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-link" href="https://secutrick-production.up.railway.app/" target="_blank" rel="noopener noreferrer">
+        secutrick.net
       </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="menuPanel">
+        <span>Menu</span>
+        <span class="menu-dots" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
 
-      <nav class="desktop-nav" aria-label="Navigation principale">
+  <aside class="menu-panel" id="menuPanel" aria-hidden="true">
+    <div class="menu-panel__inner">
+      <div class="menu-panel__top">
+        <a class="menu-panel__brand" href="#home">
+          <span>Amine</span>
+          <strong>ELKARTITE</strong>
+        </a>
+        <button class="menu-close" type="button" aria-label="Fermer le menu">Close</button>
+      </div>
+
+      <nav class="menu-panel__nav" aria-label="Menu mobile">
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#secutrick">SECUTRICK</a>
@@ -92,613 +133,509 @@
         <a href="#stack">Stack</a>
         <a href="#repositories">Repos</a>
         <a href="#socials">Socials</a>
+        <a href="#services">Services</a>
         <a href="#contact">Contact</a>
       </nav>
 
-      <div class="header-actions">
-        <a class="header-link" href="https://secutrick-production.up.railway.app/" target="_blank" rel="noreferrer">
-          secutrick.net
+      <div class="menu-panel__footer">
+        <a href="https://secutrick-production.up.railway.app/" target="_blank" rel="noopener noreferrer">
+          Visit SECUTRICK
         </a>
-        <button class="menu-button" type="button" aria-expanded="false" aria-controls="menuPanel">
-          <span>Menu</span>
-          <span class="menu-dots" aria-hidden="true"></span>
-        </button>
+        <a href="mailto:aminezth022@gmail.com">Email me</a>
       </div>
-    </header>
+    </div>
+  </aside>
 
-    <aside class="menu-panel" id="menuPanel" aria-hidden="true">
-      <div class="menu-panel__inner">
-        <div class="menu-panel__top">
-          <a class="menu-panel__brand" href="#home">
-            <span>Amine</span>
-            <strong>ELKARTITE</strong>
-          </a>
-          <button class="menu-close" type="button" aria-label="Fermer le menu">Close</button>
-        </div>
-
-        <nav class="menu-panel__nav" aria-label="Menu mobile">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#secutrick">SECUTRICK</a>
-          <a href="#projects">Projects</a>
-          <a href="#stack">Stack</a>
-          <a href="#repositories">Repos</a>
-          <a href="#socials">Socials</a>
-          <a href="#services">Services</a>
-          <a href="#contact">Contact</a>
-        </nav>
-
-        <div class="menu-panel__footer">
-          <a href="https://secutrick-production.up.railway.app/" target="_blank" rel="noreferrer">
-            Visit SECUTRICK
-          </a>
-          <a href="mailto:aminezth022@gmail.com">Email me</a>
-        </div>
-      </div>
-    </aside>
-
-    <main>
-      <section class="hero section-shell" id="home" aria-labelledby="hero-title">
-        <div class="hero-layout">
-          <div class="hero-copy reveal">
-            <p class="eyebrow">Cyber Security Specialist & Full Stack Developer / Founder @ SECUTRICK</p>
-            <h1 id="hero-title">I help companies secure their websites and prevent attacks.</h1>
-            <p class="hero-lead">
-              I build secure web platforms, vulnerability detection systems and
-              scalable applications with a practical offensive and defensive
-              security mindset.
-            </p>
-
-            <div class="hero-actions">
-              <a class="primary-button" href="#secutrick">Explore SECUTRICK</a>
-              <a class="ghost-button" href="mailto:aminezth022@gmail.com">Secure my website</a>
-            </div>
-
-            <ul class="hero-socials" aria-label="Liens sociaux">
-              <li>
-                <a
-                  class="social-link social-link--github"
-                  href="https://github.com/amine-elkartite"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="GitHub"
-                  title="GitHub"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M12 2C6.48 2 2 6.58 2 12.24c0 4.52 2.87 8.35 6.85 9.7.5.1.68-.22.68-.49v-1.9c-2.79.62-3.38-1.22-3.38-1.22-.46-1.2-1.12-1.52-1.12-1.52-.91-.64.07-.63.07-.63 1.01.07 1.54 1.07 1.54 1.07.9 1.58 2.36 1.12 2.93.86.09-.67.35-1.12.64-1.38-2.23-.26-4.57-1.14-4.57-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.31.1-2.72 0 0 .85-.28 2.77 1.05A9.37 9.37 0 0 1 12 6.89c.85 0 1.71.12 2.51.34 1.92-1.33 2.76-1.05 2.76-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.64 1.03 2.76 0 3.94-2.35 4.8-4.58 5.06.36.32.68.94.68 1.9v2.83c0 .27.18.59.69.49A10.19 10.19 0 0 0 22 12.24C22 6.58 17.52 2 12 2Z"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="social-link social-link--linkedin"
-                  href="https://www.linkedin.com/in/amine-elkartite/"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="LinkedIn"
-                  title="LinkedIn"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.4h4v11.1H3V9.4Zm6.2 0h3.84v1.52h.05c.54-.97 1.86-1.86 3.83-1.86 4.1 0 4.86 2.69 4.86 6.18v5.26h-4v-4.66c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.74h-4V9.4Z"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="social-link social-link--instagram"
-                  href="https://www.instagram.com/amineelkartite/"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Instagram"
-                  title="Instagram"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M7.8 2h8.4A5.81 5.81 0 0 1 22 7.8v8.4a5.81 5.81 0 0 1-5.8 5.8H7.8A5.81 5.81 0 0 1 2 16.2V7.8A5.81 5.81 0 0 1 7.8 2Zm0 2A3.81 3.81 0 0 0 4 7.8v8.4A3.81 3.81 0 0 0 7.8 20h8.4a3.81 3.81 0 0 0 3.8-3.8V7.8A3.81 3.81 0 0 0 16.2 4H7.8Zm8.95 1.8a1.45 1.45 0 1 1 0 2.9 1.45 1.45 0 0 1 0-2.9ZM12 7.15A4.85 4.85 0 1 1 12 16.85 4.85 4.85 0 0 1 12 7.15Zm0 2A2.85 2.85 0 1 0 12 14.85 2.85 2.85 0 0 0 12 9.15Z"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="social-link social-link--x"
-                  href="https://x.com/Amine_Elkartite"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="X"
-                  title="X"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M14.39 10.47 22.72 2h-1.98l-7.23 7.35L7.74 2H1.07l8.74 11.13L1.07 22h1.98l7.64-7.76L16.79 22h6.67l-9.07-11.53Zm-2.71 2.75-.88-1.11L3.75 3.55h3.04l5.68 7.12.88 1.11 7.4 8.98h-3.04l-6.03-7.54Z"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="social-link social-link--facebook"
-                  href="https://www.facebook.com/amine.elkartite.2025/"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Facebook"
-                  title="Facebook"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.25 10.44 22v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.49-3.91 3.78-3.91 1.1 0 2.24.2 2.24.2V8.6H15.2c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22C18.34 21.25 22 17.08 22 12.06Z"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="social-link social-link--email"
-                  href="mailto:aminezth022@gmail.com"
-                  aria-label="Email"
-                  title="Email"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.25l8 5.05 8-5.05V7H4Zm0 2.62V17h16V9.62l-7.47 4.72a1 1 0 0 1-1.06 0L4 9.62Z"
-                    />
-                  </svg>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="hero-showcase reveal" data-tilt>
-            <div class="showcase-topline">
-              <span>Portfolio <span data-year></span></span>
-              <strong>Available</strong>
-            </div>
-
-            <div class="portrait-card">
-              <img
-                src="assets/avatars/linkedIn-removebg-preview.png"
-                alt="Portrait d'Amine ELKARTITE"
-              />
-              <div>
-                <p>Amine ELKARTITE</p>
-               <span>Cyber Security Specialist & Full Stack Developer</span>
-              </div>
-            </div>
-
-            <div class="project-stack" aria-label="Apercu de projets">
-              <img src="assets/projects/project-secutrick.png" alt="Apercu du projet SECUTRICK" />
-              <img src="assets/projects/project-theway.png" alt="Apercu du projet TheWay" />
-              <img src="assets/projects/project-offres.png" alt="Apercu du projet Offres Online" />
-            </div>
-
-            <div class="hero-note">
-              <span>Focus</span>
-              <p>Web security, vulnerability scanning, pentesting and secure architecture.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-metrics reveal" aria-label="Statistiques professionnelles">
-          <span><strong id="githubReposCount">--</strong> repositories</span>
-          <span><strong id="githubFollowersCount">--</strong> followers</span>
-          <span><strong id="githubFollowingCount">--</strong> following</span>
-          <span><strong>24/7</strong> security vision</span>
-        </div>
-      </section>
-
-      <section class="about-section section-shell" id="about" aria-labelledby="about-title">
-        <div class="split-layout">
-          <article class="about-card reveal">
-            <p class="eyebrow">About</p>
-            <h2 id="about-title">cybersecurity & developper spécialist building secure products.</h2>
-            <p>
-              I am currently building SECUTRICK, a next-generation cybersecurity
-              platform designed to protect websites from real-world threats and
-              vulnerabilities. My work connects secure architecture, pentesting,
-              scalable web development and clean product execution.
-            </p>
-          </article>
-
-          <article class="profile-card reveal">
-            <img
-              src="assets/avatars/linkedIn-removebg-preview.png"
-              alt="Portrait professionnel d'Amine ELKARTITE"
-            />
-            <div>
-              <p class="mini-label">Direct line</p>
-              <a href="mailto:aminezth022@gmail.com">aminezth022@gmail.com</a>
-            </div>
-          </article>
-        </div>
-
-        <div class="profile-highlights reveal" aria-label="GitHub profile highlights">
-          <article>
-            <span>Currently building</span>
-            <h3>SECUTRICK</h3>
-            <p>A next-generation cybersecurity platform for real-world website protection.</p>
-          </article>
-          <article>
-            <span>Open to collaborate on</span>
-            <h3>SaaS, security systems and scalable apps</h3>
-            <p>High-value products with strong engineering and business impact.</p>
-          </article>
-          <article>
-            <span>Currently mastering</span>
-            <h3>Advanced pentesting and AI threat detection</h3>
-            <p>Offensive and defensive cybersecurity strategies for modern systems.</p>
-          </article>
-          <article>
-            <span>Ask me about</span>
-            <h3>Web security and attack prevention</h3>
-            <p>Vulnerability scanning, ethical hacking and secure deployment.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="security-section section-shell" id="secutrick" aria-labelledby="secutrick-title">
-        <div class="security-layout">
-          <article class="security-copy reveal">
-            <p class="eyebrow">About SECUTRICK</p>
-            <h2 id="secutrick-title">Clean and protect your website fast.</h2>
-            <p>
-              SECUTRICK is built to make enterprise-level web protection more
-              accessible to every business, from real-time checks to AI-powered
-              threat detection.
-            </p>
-            <a class="primary-button" href="https://secutrick-production.up.railway.app/" target="_blank" rel="noreferrer">
-              Visit secutrick.net
-            </a>
-          </article>
-
-          <div class="security-features reveal" aria-label="SECUTRICK features">
-            <article>
-              <span>01</span>
-              <h3>Real-time vulnerability scanning</h3>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Website protection against attacks</h3>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>SSL validation and security monitoring</h3>
-            </article>
-            <article>
-              <span>04</span>
-              <h3>AI-powered threat detection</h3>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="projects-section section-shell" id="projects" aria-labelledby="projects-title">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Projects</p>
-          <h2 id="projects-title">Interfaces avec signal, polish et objectif clair.</h2>
-          <p>
-            Une selection de projets construits autour de la securite, de la
-            conversion et d'experiences web modernes.
+  <main>
+    <section class="hero section-shell" id="home" aria-labelledby="hero-title">
+      <div class="hero-layout">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Cyber Security Specialist & Full Stack Developer / Founder @ SECUTRICK</p>
+          <h1 id="hero-title">I help companies secure their websites and prevent attacks.</h1>
+          <p class="hero-lead">
+            I build secure web platforms, vulnerability detection systems and
+            scalable applications with a practical offensive and defensive
+            security mindset.
           </p>
+
+          <div class="hero-actions">
+            <a class="primary-button" href="#secutrick">Explore SECUTRICK</a>
+            <a class="ghost-button" href="mailto:aminezth022@gmail.com">Secure my website</a>
+          </div>
+
+          <ul class="hero-socials" aria-label="Liens sociaux">
+            <li>
+              <a class="social-link social-link--github" href="https://github.com/amine-elkartite" target="_blank" rel="me noopener noreferrer" aria-label="GitHub" title="GitHub">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2C6.48 2 2 6.58 2 12.24c0 4.52 2.87 8.35 6.85 9.7.5.1.68-.22.68-.49v-1.9c-2.79.62-3.38-1.22-3.38-1.22-.46-1.2-1.12-1.52-1.12-1.52-.91-.64.07-.63.07-.63 1.01.07 1.54 1.07 1.54 1.07.9 1.58 2.36 1.12 2.93.86.09-.67.35-1.12.64-1.38-2.23-.26-4.57-1.14-4.57-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.31.1-2.72 0 0 .85-.28 2.77 1.05A9.37 9.37 0 0 1 12 6.89c.85 0 1.71.12 2.51.34 1.92-1.33 2.76-1.05 2.76-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.64 1.03 2.76 0 3.94-2.35 4.8-4.58 5.06.36.32.68.94.68 1.9v2.83c0 .27.18.59.69.49A10.19 10.19 0 0 0 22 12.24C22 6.58 17.52 2 12 2Z" />
+                </svg>
+              </a>
+            </li>
+
+            <li>
+              <a class="social-link social-link--linkedin" href="https://www.linkedin.com/in/amine-elkartite/" target="_blank" rel="me noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.4h4v11.1H3V9.4Zm6.2 0h3.84v1.52h.05c.54-.97 1.86-1.86 3.83-1.86 4.1 0 4.86 2.69 4.86 6.18v5.26h-4v-4.66c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.74h-4V9.4Z" />
+                </svg>
+              </a>
+            </li>
+
+            <li>
+              <a class="social-link social-link--instagram" href="https://www.instagram.com/amineelkartite/" target="_blank" rel="me noopener noreferrer" aria-label="Instagram" title="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7.8 2h8.4A5.81 5.81 0 0 1 22 7.8v8.4a5.81 5.81 0 0 1-5.8 5.8H7.8A5.81 5.81 0 0 1 2 16.2V7.8A5.81 5.81 0 0 1 7.8 2Zm0 2A3.81 3.81 0 0 0 4 7.8v8.4A3.81 3.81 0 0 0 7.8 20h8.4a3.81 3.81 0 0 0 3.8-3.8V7.8A3.81 3.81 0 0 0 16.2 4H7.8Zm8.95 1.8a1.45 1.45 0 1 1 0 2.9 1.45 1.45 0 0 1 0-2.9ZM12 7.15A4.85 4.85 0 1 1 12 16.85 4.85 4.85 0 0 1 12 7.15Zm0 2A2.85 2.85 0 1 0 12 14.85 2.85 2.85 0 0 0 12 9.15Z" />
+                </svg>
+              </a>
+            </li>
+
+            <li>
+              <a class="social-link social-link--x" href="https://x.com/Amine_Elkartite" target="_blank" rel="me noopener noreferrer" aria-label="X" title="X">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M14.39 10.47 22.72 2h-1.98l-7.23 7.35L7.74 2H1.07l8.74 11.13L1.07 22h1.98l7.64-7.76L16.79 22h6.67l-9.07-11.53Zm-2.71 2.75-.88-1.11L3.75 3.55h3.04l5.68 7.12.88 1.11 7.4 8.98h-3.04l-6.03-7.54Z" />
+                </svg>
+              </a>
+            </li>
+
+            <li>
+              <a class="social-link social-link--facebook" href="https://www.facebook.com/amine.elkartite.2025/" target="_blank" rel="me noopener noreferrer" aria-label="Facebook" title="Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.25 10.44 22v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.49-3.91 3.78-3.91 1.1 0 2.24.2 2.24.2V8.6H15.2c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22C18.34 21.25 22 17.08 22 12.06Z" />
+                </svg>
+              </a>
+            </li>
+
+            <li>
+              <a class="social-link social-link--email" href="mailto:aminezth022@gmail.com" aria-label="Email" title="Email">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.25l8 5.05 8-5.05V7H4Zm0 2.62V17h16V9.62l-7.47 4.72a1 1 0 0 1-1.06 0L4 9.62Z" />
+                </svg>
+              </a>
+            </li>
+          </ul>
         </div>
 
-        <div class="project-grid">
-          <article
-            class="project-card project-card--featured reveal"
-            tabindex="0"
-            data-project="SECUTRICK Security Platform"
-            data-type="Cybersecurity Founder Project"
-            data-image="assets/projects/project-secutrick.png"
-            data-desc="Concept cloud-native de securite web avec monitoring, scoring de posture, support incident et reporting executif."
-            data-tags="Security, SaaS, Monitoring"
-          >
-            <div class="project-image">
-              <img src="assets/projects/project-secutrick.png" alt="Interface du projet SECUTRICK" />
-            </div>
-            <div class="project-content">
-              <p class="project-type">Cybersecurity Founder Project</p>
-              <h3>SECUTRICK Security Platform</h3>
-              <p>
-                Plateforme de securite pour surveiller, proteger et presenter
-                l'etat d'un site web avec une interface executive.
-              </p>
-              <div class="tags">
-                <span>Security</span>
-                <span>SaaS</span>
-                <span>Monitoring</span>
-              </div>
-            </div>
-          </article>
+        <div class="hero-showcase reveal" data-tilt>
+          <div class="showcase-topline">
+            <span>Portfolio <span data-year></span></span>
+            <strong>Available</strong>
+          </div>
 
-          <article
-            class="project-card project-card--vertical reveal"
-            tabindex="0"
-            data-project="TheWay Career AI"
-            data-type="AI Product Interface"
-            data-image="assets/projects/project-theway.png"
-            data-desc="Interface premium de matching emploi qui analyse le CV, classe les opportunites et presente les offres proches de l'utilisateur."
-            data-tags="AI, UX, Product"
-          >
-            <div class="project-image">
-              <img src="assets/projects/project-theway.png" alt="Interface du projet TheWay" />
-            </div>
-            <div class="project-content">
-              <p class="project-type">AI Product Interface</p>
-              <h3>TheWay Career AI</h3>
-              <p>
-                Experience IA pour aider les candidats a trouver une voie
-                professionnelle plus pertinente.
-              </p>
-              <div class="tags">
-                <span>AI</span>
-                <span>UX</span>
-                <span>Product</span>
-              </div>
-            </div>
-          </article>
-
-          <article
-            class="project-card reveal"
-            tabindex="0"
-            data-project="Offres Online"
-            data-type="Business Web Platform"
-            data-image="assets/projects/project-offres.png"
-            data-desc="Presence web business pour services digitaux, hebergement, pages de conversion et hierarchie visuelle forte."
-            data-tags="Web, Hosting, Brand"
-          >
-            <div class="project-image">
-              <img src="assets/projects/project-offres.png" alt="Interface du projet Offres Online" />
-            </div>
-            <div class="project-content">
-              <p class="project-type">Business Web Platform</p>
-              <h3>Offres Online</h3>
-              <p>
-                Site sombre et direct pour presenter des services web, capter
-                l'attention et guider vers l'action.
-              </p>
-              <div class="tags">
-                <span>Web</span>
-                <span>Hosting</span>
-                <span>Brand</span>
-              </div>
-            </div>
-          </article>
-
-          <article
-            class="project-card reveal"
-            tabindex="0"
-            data-project="Klassy Cafe"
-            data-type="Hospitality Experience"
-            data-image="assets/projects/project-klassy.png"
-            data-desc="Landing page restaurant avec navigation elegante, image forte, reservation et rythme visuel chaleureux."
-            data-tags="Landing, Motion, Design"
-          >
-            <div class="project-image">
-              <img src="assets/projects/project-klassy.png" alt="Interface du projet Klassy Cafe" />
-            </div>
-            <div class="project-content">
-              <p class="project-type">Hospitality Experience</p>
-              <h3>Klassy Cafe</h3>
-              <p>
-                Landing page de restaurant avec hero immersif, reservation et
-                direction visuelle claire.
-              </p>
-              <div class="tags">
-                <span>Landing</span>
-                <span>Motion</span>
-                <span>Design</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="stack-section section-shell" id="stack" aria-labelledby="stack-title">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Stack</p>
-          <h2 id="stack-title">A complete stack for secure web products.</h2>
-        </div>
-
-        <div class="stack-categories reveal" aria-label="Technologies">
-          <article>
-            <h3>Development</h3>
+          <div class="portrait-card">
+            <img src="assets/avatars/linkedIn-removebg-preview.png" alt="Portrait d'Amine ELKARTITE" />
             <div>
-              <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>TypeScript</span>
-              <span>PHP</span><span>Python</span>
+              <p>Amine ELKARTITE</p>
+              <span>Cyber Security Specialist & Full Stack Developer</span>
             </div>
-          </article>
+          </div>
+
+          <div class="project-stack" aria-label="Aperçu de projets">
+            <img src="assets/projects/project-secutrick.png" alt="Aperçu du projet SECUTRICK" />
+            <img src="assets/projects/project-theway.png" alt="Aperçu du projet TheWay" />
+            <img src="assets/projects/project-offres.png" alt="Aperçu du projet Offres Online" />
+          </div>
+
+          <div class="hero-note">
+            <span>Focus</span>
+            <p>Web security, vulnerability scanning, pentesting and secure architecture.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-metrics reveal" aria-label="Statistiques professionnelles">
+        <span><strong id="githubReposCount">--</strong> repositories</span>
+        <span><strong id="githubFollowersCount">--</strong> followers</span>
+        <span><strong id="githubFollowingCount">--</strong> following</span>
+        <span><strong>24/7</strong> security vision</span>
+      </div>
+    </section>
+
+    <section class="about-section section-shell" id="about" aria-labelledby="about-title">
+      <div class="split-layout">
+        <article class="about-card reveal">
+          <p class="eyebrow">About</p>
+          <h2 id="about-title">Cyber Security Specialist building secure products.</h2>
+          <p>
+            I am currently building SECUTRICK, a next-generation cybersecurity
+            platform designed to protect websites from real-world threats and
+            vulnerabilities. My work connects secure architecture, pentesting,
+            scalable web development and clean product execution.
+          </p>
+        </article>
+
+        <article class="profile-card reveal">
+          <img src="assets/avatars/linkedIn-removebg-preview.png" alt="Portrait professionnel d'Amine ELKARTITE" />
+          <div>
+            <p class="mini-label">Direct line</p>
+            <a href="mailto:aminezth022@gmail.com">aminezth022@gmail.com</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="profile-highlights reveal" aria-label="GitHub profile highlights">
+        <article>
+          <span>Currently building</span>
+          <h3>SECUTRICK</h3>
+          <p>A next-generation cybersecurity platform for real-world website protection.</p>
+        </article>
+        <article>
+          <span>Open to collaborate on</span>
+          <h3>SaaS, security systems and scalable apps</h3>
+          <p>High-value products with strong engineering and business impact.</p>
+        </article>
+        <article>
+          <span>Currently mastering</span>
+          <h3>Advanced pentesting and AI threat detection</h3>
+          <p>Offensive and defensive cybersecurity strategies for modern systems.</p>
+        </article>
+        <article>
+          <span>Ask me about</span>
+          <h3>Web security and attack prevention</h3>
+          <p>Vulnerability scanning, ethical hacking and secure deployment.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="security-section section-shell" id="secutrick" aria-labelledby="secutrick-title">
+      <div class="security-layout">
+        <article class="security-copy reveal">
+          <p class="eyebrow">About SECUTRICK</p>
+          <h2 id="secutrick-title">Clean and protect your website fast.</h2>
+          <p>
+            SECUTRICK is built to make enterprise-level web protection more
+            accessible to every business, from real-time checks to AI-powered
+            threat detection.
+          </p>
+          <a class="primary-button" href="https://secutrick-production.up.railway.app/" target="_blank" rel="noopener noreferrer">
+            Visit secutrick.net
+          </a>
+        </article>
+
+        <div class="security-features reveal" aria-label="SECUTRICK features">
           <article>
-            <h3>Frameworks & Tools</h3>
-            <div>
-              <span>React</span><span>Next.js</span><span>Angular</span><span>Laravel</span>
-              <span>Express.js</span><span>Flutter</span>
-            </div>
-          </article>
-          <article>
-            <h3>Cloud & Hosting</h3>
-            <div>
-              <span>AWS</span><span>Firebase</span><span>Vercel</span><span>Netlify</span>
-              <span>Render</span><span>Cloudflare</span>
-            </div>
-          </article>
-          <article>
-            <h3>Databases</h3>
-            <div>
-              <span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>MariaDB</span>
-              <span>SQLite</span>
-            </div>
-          </article>
-          <article>
-            <h3>Security & DevOps</h3>
-            <div>
-              <span>JWT</span><span>Nginx</span><span>Apache</span><span>Docker</span>
-              <span>Postman</span><span>Pentesting</span>
-            </div>
-          </article>
-          <article>
-            <h3>Design & Media</h3>
-            <div>
-              <span>Figma</span><span>Photoshop</span><span>After Effects</span>
-              <span>Premiere Pro</span><span>Canva</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section
-        class="repositories-section section-shell"
-        id="repositories"
-        aria-labelledby="repositories-title"
-      >
-        <div class="section-heading reveal">
-          <p class="eyebrow">Popular repositories</p>
-          <h2 id="repositories-title">Public work across security, apps and web builds.</h2>
-        </div>
-
-        <div class="repo-grid reveal" id="githubRepos">
-          <article class="github-repo-card">
-            <span>Loading...</span>
-            <h3>GitHub repositories</h3>
-            <p>Loading latest public repositories from GitHub...</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="social-dynamic-section section-shell" id="socials" aria-labelledby="socials-title">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Social presence</p>
-          <h2 id="socials-title">Follow my work on X and LinkedIn.</h2>
-          <p>Latest updates, cybersecurity content, portfolio progress and SECUTRICK announcements.</p>
-        </div>
-
-        <div class="social-dynamic-grid reveal">
-          <article class="social-dynamic-card">
-            <div class="social-dynamic-head">
-              <span>X / Twitter</span>
-              <strong id="xUsername">@Amine_ELKARTITE</strong>
-            </div>
-
-            <div class="x-profile-card">
-              <div class="x-profile-avatar">
-                <img
-                  id="xAvatar"
-                  src="assets/avatars/linkedIn-removebg-preview.png"
-                  alt="Amine ELKARTITE X profile"
-                />
-              </div>
-
-              <div class="x-profile-info">
-                <h3 id="xName">Amine ELKARTITE</h3>
-                <span id="xHandle">@Amine_ELKARTITE</span>
-                <p id="xDescription">
-                  Cybersecurity, web development, SECUTRICK updates and personal branding.
-                </p>
-              </div>
-            </div>
-
-            <a
-              class="social-dynamic-button"
-              id="xProfileLink"
-              href="https://x.com/Amine_Elkartite"
-              target="_blank"
-              rel="noreferrer"
-            >
-              View X profile
-            </a>
-          </article>
-
-          <article class="social-dynamic-card">
-            <div class="social-dynamic-head">
-              <span>LinkedIn</span>
-              <strong id="linkedinName">Amine ELKARTITE</strong>
-            </div>
-            <p id="linkedinDescription">Full Stack Developer | React / JavaScript / PHP | Cybersecurity | Secure applications.</p>
-            <div class="linkedin-preview">
-              <div class="linkedin-avatar">
-                <img src="assets/avatars/linkedIn-removebg-preview.png" alt="Amine ELKARTITE profile" />
-              </div>
-              <div>
-                <h3>Amine ELKARTITE</h3>
-                <p>Cyber Security Specialist · Founder @ SECUTRICK</p>
-                <span>Morocco · Hybrid / Remote</span>
-              </div>
-            </div>
-            <div class="linkedin-actions">
-              <a class="social-dynamic-button" id="linkedinProfileLink" href="https://www.linkedin.com/in/amine-elkartite/" target="_blank" rel="noreferrer">View LinkedIn profile</a>
-              <a class="social-dynamic-button social-dynamic-button--ghost" id="linkedinConnectLink" href="https://www.linkedin.com/in/amine-elkartite/" target="_blank" rel="noreferrer">Connect</a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="services-section section-shell" id="services" aria-labelledby="services-title">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Services</p>
-          <h2 id="services-title">Security-first execution for serious web products.</h2>
-        </div>
-
-        <div class="service-list">
-          <article class="service-item reveal">
             <span>01</span>
-            <h3>Secure web development</h3>
-            <p>Modern websites and platforms built with maintainable, secure foundations.</p>
+            <h3>Real-time vulnerability scanning</h3>
           </article>
-          <article class="service-item reveal">
+          <article>
             <span>02</span>
-            <h3>Vulnerability detection</h3>
-            <p>Website analysis, security posture review and practical remediation guidance.</p>
+            <h3>Website protection against attacks</h3>
           </article>
-          <article class="service-item reveal">
+          <article>
             <span>03</span>
-            <h3>Cybersecurity support</h3>
-            <p>Pentesting, hardening, monitoring and attack-prevention support.</p>
+            <h3>SSL validation and security monitoring</h3>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>AI-powered threat detection</h3>
           </article>
         </div>
-      </section>
-
-      <section class="contact-section section-shell" id="contact" aria-labelledby="contact-title">
-        <div class="contact-panel reveal">
-          <p class="eyebrow">Contact</p>
-          <h2 id="contact-title">Let's secure the web together.</h2>
-          <p>
-            Open to collaborate on high-value SaaS products, advanced security
-            systems and scalable web applications.
-          </p>
-          <div class="contact-actions">
-            <a class="primary-button" href="mailto:aminezth022@gmail.com">aminezth022@gmail.com</a>
-            <a
-              class="ghost-button"
-              href="https://www.linkedin.com/in/amine-elkartite/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              LinkedIn
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <dialog class="project-dialog" id="projectDialog">
-      <button class="dialog-close" type="button" aria-label="Fermer">Fermer</button>
-      <div class="dialog-image">
-        <img src="" alt="" />
       </div>
-      <p class="dialog-type"></p>
-      <h2></h2>
-      <p class="dialog-desc"></p>
-      <div class="dialog-tags"></div>
-    </dialog>
+    </section>
 
-    <button class="back-to-top" type="button" aria-label="Retour en haut" title="Retour en haut">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 5 5.5 11.5l1.42 1.42L11 8.84V20h2V8.84l4.08 4.08 1.42-1.42L12 5Z" />
-      </svg>
-    </button>
+    <section class="projects-section section-shell" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Projects</p>
+        <h2 id="projects-title">Interfaces avec signal, polish et objectif clair.</h2>
+        <p>
+          Une sélection de projets construits autour de la sécurité, de la
+          conversion et d'expériences web modernes.
+        </p>
+      </div>
 
-    <script src="script.js"></script>
-  </body>
+      <div class="project-grid">
+        <article
+          class="project-card project-card--featured reveal"
+          tabindex="0"
+          data-project="SECUTRICK Security Platform"
+          data-type="Cybersecurity Founder Project"
+          data-image="assets/projects/project-secutrick.png"
+          data-desc="Concept cloud-native de sécurité web avec monitoring, scoring de posture, support incident et reporting exécutif."
+          data-tags="Security, SaaS, Monitoring"
+        >
+          <div class="project-image">
+            <img src="assets/projects/project-secutrick.png" alt="Interface du projet SECUTRICK" />
+          </div>
+          <div class="project-content">
+            <p class="project-type">Cybersecurity Founder Project</p>
+            <h3>SECUTRICK Security Platform</h3>
+            <p>
+              Plateforme de sécurité pour surveiller, protéger et présenter
+              l'état d'un site web avec une interface exécutive.
+            </p>
+            <div class="tags">
+              <span>Security</span>
+              <span>SaaS</span>
+              <span>Monitoring</span>
+            </div>
+          </div>
+        </article>
+
+        <article
+          class="project-card project-card--vertical reveal"
+          tabindex="0"
+          data-project="TheWay Career AI"
+          data-type="AI Product Interface"
+          data-image="assets/projects/project-theway.png"
+          data-desc="Interface premium de matching emploi qui analyse le CV, classe les opportunités et présente les offres proches de l'utilisateur."
+          data-tags="AI, UX, Product"
+        >
+          <div class="project-image">
+            <img src="assets/projects/project-theway.png" alt="Interface du projet TheWay" />
+          </div>
+          <div class="project-content">
+            <p class="project-type">AI Product Interface</p>
+            <h3>TheWay Career AI</h3>
+            <p>
+              Expérience IA pour aider les candidats à trouver une voie
+              professionnelle plus pertinente.
+            </p>
+            <div class="tags">
+              <span>AI</span>
+              <span>UX</span>
+              <span>Product</span>
+            </div>
+          </div>
+        </article>
+
+        <article
+          class="project-card reveal"
+          tabindex="0"
+          data-project="Offres Online"
+          data-type="Business Web Platform"
+          data-image="assets/projects/project-offres.png"
+          data-desc="Présence web business pour services digitaux, hébergement, pages de conversion et hiérarchie visuelle forte."
+          data-tags="Web, Hosting, Brand"
+        >
+          <div class="project-image">
+            <img src="assets/projects/project-offres.png" alt="Interface du projet Offres Online" />
+          </div>
+          <div class="project-content">
+            <p class="project-type">Business Web Platform</p>
+            <h3>Offres Online</h3>
+            <p>
+              Site sombre et direct pour présenter des services web, capter
+              l'attention et guider vers l'action.
+            </p>
+            <div class="tags">
+              <span>Web</span>
+              <span>Hosting</span>
+              <span>Brand</span>
+            </div>
+          </div>
+        </article>
+
+        <article
+          class="project-card reveal"
+          tabindex="0"
+          data-project="Klassy Cafe"
+          data-type="Hospitality Experience"
+          data-image="assets/projects/project-klassy.png"
+          data-desc="Landing page restaurant avec navigation élégante, image forte, réservation et rythme visuel chaleureux."
+          data-tags="Landing, Motion, Design"
+        >
+          <div class="project-image">
+            <img src="assets/projects/project-klassy.png" alt="Interface du projet Klassy Cafe" />
+          </div>
+          <div class="project-content">
+            <p class="project-type">Hospitality Experience</p>
+            <h3>Klassy Cafe</h3>
+            <p>
+              Landing page de restaurant avec hero immersif, réservation et
+              direction visuelle claire.
+            </p>
+            <div class="tags">
+              <span>Landing</span>
+              <span>Motion</span>
+              <span>Design</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="stack-section section-shell" id="stack" aria-labelledby="stack-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Stack</p>
+        <h2 id="stack-title">A complete stack for secure web products.</h2>
+      </div>
+
+      <div class="stack-categories reveal" aria-label="Technologies">
+        <article>
+          <h3>Development</h3>
+          <div>
+            <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>TypeScript</span>
+            <span>PHP</span><span>Python</span>
+          </div>
+        </article>
+        <article>
+          <h3>Frameworks & Tools</h3>
+          <div>
+            <span>React</span><span>Next.js</span><span>Angular</span><span>Laravel</span>
+            <span>Express.js</span><span>Flutter</span>
+          </div>
+        </article>
+        <article>
+          <h3>Cloud & Hosting</h3>
+          <div>
+            <span>AWS</span><span>Firebase</span><span>Vercel</span><span>Netlify</span>
+            <span>Render</span><span>Cloudflare</span>
+          </div>
+        </article>
+        <article>
+          <h3>Databases</h3>
+          <div>
+            <span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>MariaDB</span>
+            <span>SQLite</span>
+          </div>
+        </article>
+        <article>
+          <h3>Security & DevOps</h3>
+          <div>
+            <span>JWT</span><span>Nginx</span><span>Apache</span><span>Docker</span>
+            <span>Postman</span><span>Pentesting</span>
+          </div>
+        </article>
+        <article>
+          <h3>Design & Media</h3>
+          <div>
+            <span>Figma</span><span>Photoshop</span><span>After Effects</span>
+            <span>Premiere Pro</span><span>Canva</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="repositories-section section-shell" id="repositories" aria-labelledby="repositories-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Popular repositories</p>
+        <h2 id="repositories-title">Public work across security, apps and web builds.</h2>
+      </div>
+
+      <div class="repo-grid reveal" id="githubRepos">
+        <article class="github-repo-card">
+          <span>Loading...</span>
+          <h3>GitHub repositories</h3>
+          <p>Loading latest public repositories from GitHub...</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="social-dynamic-section section-shell" id="socials" aria-labelledby="socials-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Social presence</p>
+        <h2 id="socials-title">Follow my work on X and LinkedIn.</h2>
+        <p>Latest updates, cybersecurity content, portfolio progress and SECUTRICK announcements.</p>
+      </div>
+
+      <div class="social-dynamic-grid reveal">
+        <article class="social-dynamic-card">
+          <div class="social-dynamic-head">
+            <span>X / Twitter</span>
+            <strong id="xUsername">@Amine_Elkartite</strong>
+          </div>
+
+          <div class="x-profile-card">
+            <div class="x-profile-avatar">
+              <img id="xAvatar" src="assets/avatars/linkedIn-removebg-preview.png" alt="Amine ELKARTITE X profile" />
+            </div>
+
+            <div class="x-profile-info">
+              <h3 id="xName">Amine ELKARTITE</h3>
+              <span id="xHandle">@Amine_Elkartite</span>
+              <p id="xDescription">
+                Cybersecurity, web development, SECUTRICK updates and personal branding.
+              </p>
+            </div>
+          </div>
+
+          <a class="social-dynamic-button" id="xProfileLink" href="https://x.com/Amine_Elkartite" target="_blank" rel="me noopener noreferrer">
+            View X profile
+          </a>
+        </article>
+
+        <article class="social-dynamic-card">
+          <div class="social-dynamic-head">
+            <span>LinkedIn</span>
+            <strong id="linkedinName">Amine ELKARTITE</strong>
+          </div>
+          <p id="linkedinDescription">Full Stack Developer | React / JavaScript / PHP | Cybersecurity | Secure applications.</p>
+          <div class="linkedin-preview">
+            <div class="linkedin-avatar">
+              <img src="assets/avatars/linkedIn-removebg-preview.png" alt="Amine ELKARTITE profile" />
+            </div>
+            <div>
+              <h3>Amine ELKARTITE</h3>
+              <p>Cyber Security Specialist · Founder @ SECUTRICK</p>
+              <span>Morocco · Hybrid / Remote</span>
+            </div>
+          </div>
+          <div class="linkedin-actions">
+            <a class="social-dynamic-button" id="linkedinProfileLink" href="https://www.linkedin.com/in/amine-elkartite/" target="_blank" rel="me noopener noreferrer">View LinkedIn profile</a>
+            <a class="social-dynamic-button social-dynamic-button--ghost" id="linkedinConnectLink" href="https://www.linkedin.com/in/amine-elkartite/" target="_blank" rel="me noopener noreferrer">Connect</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="services-section section-shell" id="services" aria-labelledby="services-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Services</p>
+        <h2 id="services-title">Security-first execution for serious web products.</h2>
+      </div>
+
+      <div class="service-list">
+        <article class="service-item reveal">
+          <span>01</span>
+          <h3>Secure web development</h3>
+          <p>Modern websites and platforms built with maintainable, secure foundations.</p>
+        </article>
+        <article class="service-item reveal">
+          <span>02</span>
+          <h3>Vulnerability detection</h3>
+          <p>Website analysis, security posture review and practical remediation guidance.</p>
+        </article>
+        <article class="service-item reveal">
+          <span>03</span>
+          <h3>Cybersecurity support</h3>
+          <p>Pentesting, hardening, monitoring and attack-prevention support.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact-section section-shell" id="contact" aria-labelledby="contact-title">
+      <div class="contact-panel reveal">
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-title">Let's secure the web together.</h2>
+        <p>
+          Open to collaborate on high-value SaaS products, advanced security
+          systems and scalable web applications.
+        </p>
+        <div class="contact-actions">
+          <a class="primary-button" href="mailto:aminezth022@gmail.com">aminezth022@gmail.com</a>
+          <a class="ghost-button" href="https://www.linkedin.com/in/amine-elkartite/" target="_blank" rel="me noopener noreferrer">
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="project-dialog" id="projectDialog">
+    <button class="dialog-close" type="button" aria-label="Fermer">Fermer</button>
+    <div class="dialog-image">
+      <img src="" alt="" />
+    </div>
+    <p class="dialog-type"></p>
+    <h2></h2>
+    <p class="dialog-desc"></p>
+    <div class="dialog-tags"></div>
+  </dialog>
+
+  <button class="back-to-top" type="button" aria-label="Retour en haut" title="Retour en haut">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 5 5.5 11.5l1.42 1.42L11 8.84V20h2V8.84l4.08 4.08 1.42-1.42L12 5Z" />
+    </svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
 </html>
