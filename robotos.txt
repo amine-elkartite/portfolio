@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://amineelkartite.netlify.app/sitemap.xml
+Sitemap: https://amine-elkartite.github.io/portfolio/sitemap.xml
