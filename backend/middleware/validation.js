@@ -21,7 +21,7 @@ export const schemas = {
   messages:[text('name',100),body('email').isEmail().isLength({max:254}).trim(),text('subject',200),text('message',5000)],
   clients:[text('name',120),text('company',150,true),body('email').isEmail().isLength({max:254}).trim(),text('phone',30,true),text('notes',5000,true)],
   tasks:[text('title',200),text('description',5000,true),choice('status',['todo','in_progress','done']),choice('priority',['low','medium','high']),date('due_date')],
-  quotes:[text('number',60),body('client_id').optional({values:'falsy'}).isInt({min:1}).toInt(),text('title',200),body('amount').isFloat({min:0,max:999999999}).toFloat(),choice('status',['draft','sent','accepted','rejected']),date('due_date'),text('notes',5000,true)],
-  invoices:[text('number',60),body('client_id').optional({values:'falsy'}).isInt({min:1}).toInt(),text('title',200),body('amount').isFloat({min:0,max:999999999}).toFloat(),choice('status',['draft','sent','paid','overdue']),date('due_date'),date('paid_at'),text('notes',5000,true)],
+  quotes:[text('number',60,true),body('client_id').optional({values:'falsy'}).isInt({min:1}).toInt(),text('title',200),body('amount').isFloat({min:0,max:999999999}).toFloat(),choice('status',['draft','sent','accepted','rejected']),date('due_date'),text('notes',5000,true)],
+  invoices:[text('number',60,true),body('client_id').optional({values:'falsy'}).isInt({min:1}).toInt(),text('title',200),body('amount').isFloat({min:0,max:999999999}).toFloat(),choice('status',['draft','sent','paid','overdue']),date('due_date'),date('paid_at'),text('notes',5000,true)],
 };
 export const loginRules=[body('email').isEmail().isLength({max:254}).trim(),body('password').isString().isLength({min:1,max:72})];
