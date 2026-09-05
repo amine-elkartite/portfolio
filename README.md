@@ -135,6 +135,14 @@ node tests/browser-check.js
 
 ## Déploiement
 
+### Vercel
+
+Le dépôt inclut `api/index.js` et `vercel.json` pour exécuter l’application Express comme Vercel Function. Dans Vercel, conserver la racine du projet à la racine du dépôt et définir le Framework Preset sur **Express** ou laisser `vercel.json` le sélectionner.
+
+Configurer pour Production, Preview et Development les variables `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `JWT_SECRET`, `FRONTEND_URL`, `CANONICAL_HOST` et `NODE_ENV=production`. La base MySQL/MariaDB doit accepter les connexions depuis Vercel ; une base locale ou Docker liée à `127.0.0.1` n’est pas accessible depuis une Function.
+
+Le système de fichiers d’une Vercel Function n’est pas un stockage persistant. Pour conserver les images envoyées depuis l’administration en production, connecter un stockage objet puis adapter `middleware/upload.js`. Les images déjà livrées dans `frontend/assets/images/` restent disponibles normalement.
+
 1. Utiliser une base durable et un utilisateur limité à cette base ; importer le schéma avec un compte d’installation.
 2. Définir un nouveau `JWT_SECRET`, `NODE_ENV=production`, les paramètres DB et `FRONTEND_URL=https://votre-domaine`.
    Définir aussi `CANONICAL_HOST` sans protocole et renseigner dans Paramètres → SEO l’URL canonique réellement possédée. La valeur initiale `https://amineelkartite.com` sert de configuration de départ et doit être remplacée si le domaine final diffère.
