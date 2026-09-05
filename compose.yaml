@@ -1,0 +1,47 @@
+services:
+  database:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: portfolio_db
+      MARIADB_USER: portfolio_app
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD in .env}
+    volumes:
+      - database:/var/lib/mysql
+      - ./database/portfolio.sql:/docker-entrypoint-initdb.d/01-portfolio.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5000:5000"
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      DB_HOST: database
+      DB_USER: portfolio_app
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      DB_NAME: portfolio_db
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+      FRONTEND_URL: ${FRONTEND_URL:?Set FRONTEND_URL in .env}
+      CANONICAL_HOST: ${CANONICAL_HOST:-}
+      GA_MEASUREMENT_ID: ${GA_MEASUREMENT_ID:-}
+      TRUST_PROXY: 1
+    volumes:
+      - uploads:/app/backend/uploads/projects
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:5000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+volumes:
+  database:
+  uploads:

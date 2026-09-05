@@ -1,0 +1,13 @@
+import {Router} from 'express';
+import {controller,publicList,publicGet} from '../controllers/project.controller.js';
+import {verifyToken} from '../middleware/auth.js';
+import {upload} from '../middleware/upload.js';
+import {schemas,idRule,validate} from '../middleware/validation.js';
+const router=Router();
+router.get('/',publicList); router.get('/manage',verifyToken,controller.list);
+router.get('/manage/:id',verifyToken,idRule,validate,controller.get);
+router.get('/:id',idRule,validate,publicGet);
+router.post('/',verifyToken,upload.single('thumbnail'),schemas.projects,validate,controller.create);
+router.put('/:id',verifyToken,idRule,upload.single('thumbnail'),schemas.projects,validate,controller.update);
+router.delete('/:id',verifyToken,idRule,validate,controller.remove);
+export default router;

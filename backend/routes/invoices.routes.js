@@ -1,0 +1,12 @@
+import {Router} from 'express';
+import {controller} from '../controllers/invoice.controller.js';
+import {verifyToken} from '../middleware/auth.js';
+import {schemas,idRule,validate} from '../middleware/validation.js';
+
+const router=Router();
+router.use(verifyToken); router.get('/',controller.list);
+router.post('/',verifyToken,schemas.invoices,validate,controller.create);
+router.get('/:id',verifyToken,idRule,validate,controller.get);
+router.put('/:id',verifyToken,idRule,schemas.invoices,validate,controller.update);
+router.delete('/:id',verifyToken,idRule,validate,controller.remove);
+export default router;

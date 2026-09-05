@@ -1,0 +1,13 @@
+import {Router} from 'express';
+import {controller} from '../controllers/service.controller.js';
+import {verifyToken} from '../middleware/auth.js';
+import {schemas,idRule,validate} from '../middleware/validation.js';
+import Model from '../models/Service.js';
+import {ok} from '../controllers/crud.controller.js';
+const router=Router();
+router.get('/',async (req,res)=>ok(res,(await Model.all()).filter(s=>s.active))); router.get('/manage',verifyToken,controller.list);
+router.post('/',verifyToken,schemas.services,validate,controller.create);
+router.get('/:id',verifyToken,idRule,validate,controller.get);
+router.put('/:id',verifyToken,idRule,schemas.services,validate,controller.update);
+router.delete('/:id',verifyToken,idRule,validate,controller.remove);
+export default router;
