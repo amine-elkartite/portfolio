@@ -1,14 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "express",
-  "installCommand": "npm ci --omit=dev --no-audit --no-fund",
-  "functions": {
-    "api/index.js": {
-      "includeFiles": ["frontend/**"],
-      "maxDuration": 30
-    }
-  },
-  "rewrites": [
-    {"source": "/(.*)", "destination": "/api"}
-  ]
+  "installCommand": "npm ci --omit=dev --no-audit --no-fund"
 }

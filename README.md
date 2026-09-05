@@ -137,7 +137,7 @@ node tests/browser-check.js
 
 ### Vercel
 
-Le dépôt inclut `api/index.js` et `vercel.json` pour exécuter l’application Express comme Vercel Function. Dans Vercel, conserver la racine du projet à la racine du dépôt et définir le Framework Preset sur **Express** ou laisser `vercel.json` le sélectionner.
+Le dépôt inclut `index.js` et `vercel.json` pour exécuter l’application Express comme Vercel Function. Dans Vercel, conserver la racine du projet à la racine du dépôt et définir le Framework Preset sur **Express** ou laisser `vercel.json` le sélectionner.
 
 Configurer pour Production, Preview et Development les variables `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `JWT_SECRET`, `FRONTEND_URL`, `CANONICAL_HOST` et `NODE_ENV=production`. La base MySQL/MariaDB doit accepter les connexions depuis Vercel ; une base locale ou Docker liée à `127.0.0.1` n’est pas accessible depuis une Function.
 
