@@ -6,6 +6,7 @@ const badge=value=>`<span class="status ${/^[a-z_]+$/.test(value)?value:''}">${e
 const date=value=>value?new Date(value).toLocaleDateString('fr-FR',{timeZone:'UTC'}):'—';
 const money=value=>new Intl.NumberFormat('fr-MA',{maximumFractionDigits:2}).format(Number(value)||0)+' DH';
 const empty=(title,description='')=>`<div class="admin-empty">${icon('inbox')}<strong>${e(title)}</strong>${description?`<p>${e(description)}</p>`:''}</div>`;
+const applyAvatar=avatar=>{if(!avatar)return;document.querySelectorAll('.admin-user .avatar').forEach(node=>{node.classList.add('avatar-image');node.innerHTML=`<img src="${e(avatar)}" alt="Photo de profil">`;});};
 const opts=values=>values.map(v=>Array.isArray(v)?v:[v,labels[v]||v]);
 const categories=['Sites Web','E-commerce','Applications Web','Applications Mobiles','APIs','Autres'];
 const schemas={
@@ -32,7 +33,7 @@ if(page==='login') {
  document.addEventListener('keydown',event=>{if((event.metaKey||event.ctrlKey)&&event.key==='k'){event.preventDefault();document.querySelector('#global-search input').focus();}if(event.key==='Escape'){document.querySelector('#sidebar').classList.remove('open');document.querySelector('.sidebar-toggle').setAttribute('aria-expanded','false');}});
  document.querySelector('#global-search').addEventListener('submit',async event=>{event.preventDefault();const query=event.currentTarget.elements.q.value.trim();if(!query)return;try{const [projects,clients]=await Promise.all([apiGet('/projects/manage'),apiGet('/clients')]);const match=row=>Object.values(row).join(' ').toLocaleLowerCase().includes(query.toLocaleLowerCase());openDialog(`<h2>Résultats pour « ${e(query)} »</h2><div class="search-results"><section><h2>Projets</h2>${projects.filter(match).map(p=>`<a class="recent-message" href="/admin/project-form.html?id=${p.id}">${icon('folder')}<strong>${e(p.title)}</strong></a>`).join('')||empty('Aucun projet trouvé')}</section><section><h2>Clients</h2>${clients.filter(match).map(c=>`<a class="recent-message" href="/admin/clients.html?search=${encodeURIComponent(c.name)}">${icon('user')}<strong>${e(c.name)}</strong><span>${e(c.company)}</span></a>`).join('')||empty('Aucun client trouvé')}</section></div>`);}catch(error){toast(error.message,true);}});
  try {
-  await apiGet('/auth/me');
+  const currentUser=await apiGet('/auth/me');applyAvatar(currentUser.avatar);
   if(page==='dashboard'||page==='statistics')await dashboard();
   else if(page==='project-form')await projectPage();
   else if(page==='settings')await settingsPage();

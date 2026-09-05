@@ -5,9 +5,19 @@ import {pool} from '../config/database.js';
 import {verifyToken} from '../middleware/auth.js';
 import {validate} from '../middleware/validation.js';
 import {ok} from '../controllers/crud.controller.js';
+import {upload,saveImage,removeImage} from '../middleware/upload.js';
 const router=Router();
 router.get('/public',async(req,res)=>{const [[rows],[seo]]=await Promise.all([pool.query('SELECT setting_key,setting_value FROM settings'),pool.query('SELECT site_name,site_url,default_title,default_description,default_og_image FROM seo_settings ORDER BY id LIMIT 1')]);ok(res,{...Object.fromEntries(rows.map(r=>[r.setting_key,r.setting_value])),siteName:seo[0]?.site_name,siteUrl:seo[0]?.site_url,defaultTitle:seo[0]?.default_title,defaultDescription:seo[0]?.default_description,defaultOgImage:seo[0]?.default_og_image});});
 router.use(verifyToken);
+router.post('/avatar',upload.single('avatar'),async(req,res)=>{
+ if(!req.file)return res.status(422).json({success:false,message:'Choisissez une image JPG, PNG ou WebP.'});
+ const [rows]=await pool.execute("SELECT setting_value FROM settings WHERE setting_key='admin_avatar' LIMIT 1");
+ const avatar=await saveImage(req.file);
+ try { await pool.execute("INSERT INTO settings (setting_key,setting_value) VALUES ('admin_avatar',?) ON DUPLICATE KEY UPDATE setting_value=VALUES(setting_value)",[avatar]); }
+ catch(error) { await removeImage(avatar); throw error; }
+ if(rows[0]?.setting_value&&rows[0].setting_value!==avatar)await removeImage(rows[0].setting_value);
+ ok(res,{avatar},'Photo de profil mise à jour.');
+});
 router.get('/',async(req,res)=>{const [[rows],[seo],[pages]]=await Promise.all([pool.query('SELECT setting_key,setting_value FROM settings'),pool.query('SELECT * FROM seo_settings ORDER BY id LIMIT 1'),pool.query('SELECT * FROM page_seo ORDER BY id')]);ok(res,{...Object.fromEntries(rows.map(r=>[r.setting_key,r.setting_value])),seo:seo[0],pages});});
 router.put('/',body('availability').isBoolean().toBoolean(),body('linkedin_url').optional({values:'falsy'}).isURL({protocols:['https'],require_protocol:true}).isLength({max:2048}),body('github_url').optional({values:'falsy'}).isURL({protocols:['https'],require_protocol:true}).isLength({max:2048}),body('instagram_url').optional({values:'falsy'}).isURL({protocols:['https'],require_protocol:true}).isLength({max:2048}),validate,async(req,res)=>{
  const conn=await pool.getConnection();try{await conn.beginTransaction();for(const key of ['availability','linkedin_url','github_url','instagram_url']) await conn.execute('INSERT INTO settings (setting_key,setting_value) VALUES (?,?) ON DUPLICATE KEY UPDATE setting_value=VALUES(setting_value)',[key,String(req.validated[key]??'')]);await conn.commit();}catch(e){await conn.rollback();throw e;}finally{conn.release();} ok(res,null,'Paramètres enregistrés.');

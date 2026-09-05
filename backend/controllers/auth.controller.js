@@ -18,4 +18,4 @@ export async function logout(req,res) {
   await pool.execute('UPDATE users SET token_version=token_version+1 WHERE id=?',[req.user.id]);
   res.clearCookie('portfolio_session',{...cookieOptions,maxAge:undefined}); return ok(res,null,'Déconnexion réussie.');
 }
-export function me(req,res) { const {token_version,...user}=req.user; return ok(res,user); }
+export async function me(req,res) { const {token_version,...user}=req.user; const [rows]=await pool.execute("SELECT setting_value FROM settings WHERE setting_key='admin_avatar' LIMIT 1"); return ok(res,{...user,avatar:rows[0]?.setting_value||null}); }
