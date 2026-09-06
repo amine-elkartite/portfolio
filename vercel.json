@@ -1,5 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "express",
-  "installCommand": "npm ci --omit=dev --no-audit --no-fund"
+  "installCommand": "npm ci --omit=dev --no-audit --no-fund",
+  "functions": {
+    "index.js": {
+      "includeFiles": [
+        "frontend/**",
+        "backend/uploads/**"
+      ]
+    }
+  }
 }
