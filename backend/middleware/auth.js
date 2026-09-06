@@ -4,6 +4,7 @@ export function getCookie(req, name) {
   const entry = (req.headers.cookie || '').split(';').map(x => x.trim()).find(x => x.startsWith(name + '='));
   try { return entry ? decodeURIComponent(entry.slice(name.length + 1)) : null; } catch { return null; }
 }
+const databaseErrorCodes=new Set(['ECONNREFUSED','ETIMEDOUT','ENOTFOUND','EAI_AGAIN','ER_ACCESS_DENIED_ERROR','ER_BAD_DB_ERROR','ER_NO_SUCH_TABLE','PROTOCOL_CONNECTION_LOST','ER_CON_COUNT_ERROR']);
 export async function verifyToken(req, res, next) {
   const token = req.headers.authorization?.startsWith('Bearer ') ? req.headers.authorization.slice(7) : getCookie(req, 'portfolio_session');
   if (!token) return res.status(401).json({success:false, message:'Connexion requise.'});
@@ -14,10 +15,10 @@ export async function verifyToken(req, res, next) {
     req.user = user; next();
   } catch (error) {
     if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') return res.status(401).json({success:false,message:'Session expirée.'});
+    if(databaseErrorCodes.has(error.code)) return res.status(503).json({success:false,message:'Connexion à la base de données indisponible.',code:error.code});
     next(error);
   }
 }
-// Reject cross-origin cookie mutations; API bearer clients remain supported.
 export function sameOrigin(req,res,next) {
   if (['GET','HEAD','OPTIONS'].includes(req.method) || req.headers.authorization?.startsWith('Bearer ')) return next();
   const origin = req.get('origin');
