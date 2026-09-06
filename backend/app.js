@@ -47,7 +47,21 @@ app.use('/api',(req,res)=>res.status(404).json({success:false,message:'Route int
 app.use(seoRoutes);
 app.use('/uploads',express.static(fileURLToPath(new URL('./uploads/',import.meta.url)),{dotfiles:'deny',maxAge:'1d'}));
 const cleanPages={home:'/',about:'/about',services:'/services',projects:'/projects',skills:'/skills',contact:'/contact'};
-for(const [key,path] of Object.entries(cleanPages))app.get(path,async(req,res)=>res.type('html').send(await renderPublicPage(key)));
+const publicPageFiles={
+ home:new URL('../frontend/index.html',import.meta.url),
+ about:new URL('../frontend/about.html',import.meta.url),
+ services:new URL('../frontend/services.html',import.meta.url),
+ projects:new URL('../frontend/projects.html',import.meta.url),
+ skills:new URL('../frontend/skills.html',import.meta.url),
+ contact:new URL('../frontend/contact.html',import.meta.url)
+};
+for(const [key,path] of Object.entries(cleanPages))app.get(path,async(req,res)=>{
+ try{return res.type('html').send(await renderPublicPage(key));}
+ catch(error){
+  console.error('[public-page] dynamic render failed, serving static fallback',key,error.code||error.name,error.message);
+  return res.type('html').sendFile(fileURLToPath(publicPageFiles[key]));
+ }
+});
 for(const [key,path] of Object.entries(cleanPages))if(key!=='home')app.get(`/${key}.html`,(req,res)=>res.redirect(301,path));
 app.get('/index.html',(req,res)=>res.redirect(301,'/'));
 app.get('/privacy',(req,res)=>res.set('X-Robots-Tag','noindex, follow').sendFile(fileURLToPath(new URL('../frontend/privacy.html',import.meta.url))));
