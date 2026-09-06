@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {sameOrigin,verifyToken} from './middleware/auth.js';
 import {errorHandler} from './middleware/errorHandler.js';
 import {stats} from './controllers/dashboard.controller.js';
-import {pool} from './config/database.js';
+import {pool,databaseDiagnostics} from './config/database.js';
 import authRoutes from './routes/auth.routes.js';
 import projectsRoutes from './routes/projects.routes.js';
 import servicesRoutes from './routes/services.routes.js';
@@ -20,7 +20,6 @@ import dashboardRoutes from './routes/dashboard.routes.js';
 import settingsRoutes from './routes/settings.routes.js';
 import seoRoutes from './routes/seo.routes.js';
 import {renderPublicPage,renderProject} from './services/seo.service.js';
-import {fallbackProjects} from './data/publicFallbacks.js';
 export const app=express();
 app.disable('x-powered-by');
 if(process.env.TRUST_PROXY==='1'||process.env.VERCEL==='1')app.set('trust proxy',1);
@@ -35,11 +34,11 @@ app.get('/api/health',async(req,res)=>{
  try{
   const [[dbRows],[tableRows]]=await Promise.all([
    pool.query('SELECT DATABASE() AS database_name'),
-   pool.query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME IN ('projects','settings','seo_settings','page_seo') ORDER BY TABLE_NAME")
+   pool.query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME IN ('users','projects','settings','seo_settings','page_seo') ORDER BY TABLE_NAME")
   ]);
-  res.json({success:true,data:{status:'ok',database:dbRows[0]?.database_name||null,tables:tableRows.map(row=>row.TABLE_NAME)}});
+  res.json({success:true,data:{status:'ok',database:dbRows[0]?.database_name||null,tables:tableRows.map(row=>row.TABLE_NAME),connection:databaseDiagnostics}});
  }catch(error){
-  res.status(503).json({success:false,message:'Connexion à la base de données indisponible.',code:error.code||'DB_ERROR'});
+  res.status(503).json({success:false,message:'Connexion à la base de données indisponible.',code:error.code||'DB_ERROR',data:{connection:databaseDiagnostics}});
  }
 });
 app.use('/api/auth',authRoutes);
@@ -79,14 +78,8 @@ app.get('/privacy',(req,res)=>res.set('X-Robots-Tag','noindex, follow').sendFile
 app.get('/privacy.html',(req,res)=>res.redirect(301,'/privacy'));
 app.get('/project.html',(req,res)=>res.redirect(301,'/projects'));
 app.get('/projects/:slug',async(req,res)=>{
- let project;
- try{
-  const [rows]=await pool.execute("SELECT * FROM projects WHERE slug=? AND status='published'",[req.params.slug]);
-  project=rows[0];
- }catch(error){
-  console.warn('[project page fallback]',error.code||error.name);
-  project=fallbackProjects.find(item=>item.slug===req.params.slug);
- }
+ const [rows]=await pool.execute("SELECT * FROM projects WHERE slug=? AND status='published'",[req.params.slug]);
+ const project=rows[0];
  if(!project)return res.status(404).sendFile(fileURLToPath(new URL('../frontend/404.html',import.meta.url)));
  return res.type('html').send(await renderProject(project));
 });
