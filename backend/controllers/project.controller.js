@@ -2,6 +2,7 @@ import Project from '../models/Project.js';
 import {ok} from './crud.controller.js';
 import {saveImage,removeImage} from '../middleware/upload.js';
 import {ensurePublicSchema} from '../services/publicSchema.service.js';
+import {fallbackProjects} from '../data/publicFallbacks.js';
 import slugify from 'slugify';
 import {randomBytes} from 'node:crypto';
 const missing=res=>res.status(404).json({success:false,message:'Projet introuvable.'});
@@ -28,5 +29,11 @@ export const controller={
  },
  async remove(req,res){await ensurePublicSchema();const row=await Project.find(req.params.id);if(!row)return missing(res);await Project.remove(row.id);await removeImage(row.thumbnail);return ok(res,null,'Projet supprimé.');}
 };
-export async function publicList(req,res){await ensurePublicSchema();return ok(res,(await Project.all()).filter(p=>p.status==='published'));}
-export async function publicGet(req,res){await ensurePublicSchema();const p=await Project.find(req.params.id);return p&&p.status==='published'?ok(res,p):missing(res);}
+export async function publicList(req,res){
+ try{return ok(res,(await Project.all()).filter(p=>p.status==='published'));}
+ catch(error){console.warn('[projects public fallback]',error.code||error.name);return ok(res,fallbackProjects);}
+}
+export async function publicGet(req,res){
+ try{const p=await Project.find(req.params.id);return p&&p.status==='published'?ok(res,p):missing(res);}
+ catch(error){console.warn('[project public fallback]',error.code||error.name);const p=fallbackProjects.find(item=>String(item.id)===String(req.params.id));return p?ok(res,p):missing(res);}
+}
