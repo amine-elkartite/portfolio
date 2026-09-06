@@ -83,6 +83,6 @@ app.get('/projects/:slug',async(req,res)=>{
  if(!project)return res.status(404).sendFile(fileURLToPath(new URL('../frontend/404.html',import.meta.url)));
  return res.type('html').send(await renderProject(project));
 });
-app.use(express.static(fileURLToPath(new URL('../frontend/',import.meta.url)),{index:false,dotfiles:'deny',maxAge:process.env.NODE_ENV==='production'?'7d':0,setHeaders(res,file){if(file.includes('/admin/'))res.set('X-Robots-Tag','noindex, nofollow, noarchive');}}));
+app.use(express.static(fileURLToPath(new URL('../frontend/',import.meta.url)),{index:false,dotfiles:'deny',maxAge:process.env.NODE_ENV==='production'?'7d':0,setHeaders(res,file){if(file.includes('/admin/')){res.set('X-Robots-Tag','noindex, nofollow, noarchive');res.set('Cache-Control','no-store, max-age=0');}}}));
 app.use((req,res)=>res.status(404).set('X-Robots-Tag','noindex').sendFile(fileURLToPath(new URL('../frontend/404.html',import.meta.url))));
 app.use(errorHandler);
