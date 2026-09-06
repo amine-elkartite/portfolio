@@ -20,7 +20,7 @@ import dashboardRoutes from './routes/dashboard.routes.js';
 import settingsRoutes from './routes/settings.routes.js';
 import seoRoutes from './routes/seo.routes.js';
 import {renderPublicPage,renderProject} from './services/seo.service.js';
-import {ensurePublicSchema} from './services/publicSchema.service.js';
+import {fallbackProjects} from './data/publicFallbacks.js';
 export const app=express();
 app.disable('x-powered-by');
 if(process.env.TRUST_PROXY==='1'||process.env.VERCEL==='1')app.set('trust proxy',1);
@@ -52,7 +52,7 @@ app.use('/api/tasks',tasksRoutes);
 app.use('/api/quotes',quotesRoutes);
 app.use('/api/invoices',invoicesRoutes);
 app.use('/api/dashboard',dashboardRoutes);
-app.use('/api/settings',async(req,res,next)=>{try{await ensurePublicSchema();next();}catch(error){next(error);}},settingsRoutes);
+app.use('/api/settings',settingsRoutes);
 app.get('/api/admin/dashboard',verifyToken,stats);
 app.use('/api',(req,res)=>res.status(404).json({success:false,message:'Route introuvable.'}));
 app.use(seoRoutes);
@@ -78,7 +78,18 @@ app.get('/index.html',(req,res)=>res.redirect(301,'/'));
 app.get('/privacy',(req,res)=>res.set('X-Robots-Tag','noindex, follow').sendFile(fileURLToPath(new URL('../frontend/privacy.html',import.meta.url))));
 app.get('/privacy.html',(req,res)=>res.redirect(301,'/privacy'));
 app.get('/project.html',(req,res)=>res.redirect(301,'/projects'));
-app.get('/projects/:slug',async(req,res)=>{await ensurePublicSchema();const [rows]=await pool.execute("SELECT * FROM projects WHERE slug=? AND status='published'",[req.params.slug]);if(!rows[0])return res.status(404).sendFile(fileURLToPath(new URL('../frontend/404.html',import.meta.url)));res.type('html').send(await renderProject(rows[0]));});
+app.get('/projects/:slug',async(req,res)=>{
+ let project;
+ try{
+  const [rows]=await pool.execute("SELECT * FROM projects WHERE slug=? AND status='published'",[req.params.slug]);
+  project=rows[0];
+ }catch(error){
+  console.warn('[project page fallback]',error.code||error.name);
+  project=fallbackProjects.find(item=>item.slug===req.params.slug);
+ }
+ if(!project)return res.status(404).sendFile(fileURLToPath(new URL('../frontend/404.html',import.meta.url)));
+ return res.type('html').send(await renderProject(project));
+});
 app.use(express.static(fileURLToPath(new URL('../frontend/',import.meta.url)),{index:false,dotfiles:'deny',maxAge:process.env.NODE_ENV==='production'?'7d':0,setHeaders(res,file){if(file.includes('/admin/'))res.set('X-Robots-Tag','noindex, nofollow, noarchive');}}));
 app.use((req,res)=>res.status(404).set('X-Robots-Tag','noindex').sendFile(fileURLToPath(new URL('../frontend/404.html',import.meta.url))));
 app.use(errorHandler);
