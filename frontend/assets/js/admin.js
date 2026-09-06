@@ -28,7 +28,8 @@ if(page==='login') {
  apiGet('/auth/me').then(()=>location.replace('/admin/dashboard.html')).catch(()=>{});
 } else {
  document.querySelector('.sidebar-toggle')?.addEventListener('click',event=>{const open=document.querySelector('#sidebar').classList.toggle('open');event.currentTarget.setAttribute('aria-expanded',String(open));});
- document.querySelector('.admin-user')?.insertAdjacentHTML('beforeend',`<a class="profile-shortcut" href="/admin/profile.html" aria-label="Ouvrir mon profil">${icon('user-round')}<span>Mon profil</span></a>`);
+ const settingsLink=document.querySelector('.sidebar nav a[href="/admin/settings.html"]');
+ if(settingsLink&&!document.querySelector('.sidebar nav a[href="/admin/profile.html"]'))settingsLink.insertAdjacentHTML('afterend',`<a href="/admin/profile.html" ${page==='profile'?'class="active" aria-current="page"':''}>${icon('user-round')}<span>Mon profil</span></a>`);
  document.querySelector('#logout').addEventListener('click',async()=>{try{await apiPost('/auth/logout');location.replace('/admin/login.html');}catch(error){toast(error.message,true);}});
  document.addEventListener('keydown',event=>{if((event.metaKey||event.ctrlKey)&&event.key==='k'){event.preventDefault();document.querySelector('#global-search input').focus();}if(event.key==='Escape'){document.querySelector('#sidebar').classList.remove('open');document.querySelector('.sidebar-toggle').setAttribute('aria-expanded','false');}});
  document.querySelector('#global-search').addEventListener('submit',async event=>{event.preventDefault();const query=event.currentTarget.elements.q.value.trim();if(!query)return;try{const [projects,clients]=await Promise.all([apiGet('/projects/manage'),apiGet('/clients')]);const match=row=>Object.values(row).join(' ').toLocaleLowerCase().includes(query.toLocaleLowerCase());openDialog(`<h2>Résultats pour « ${e(query)} »</h2><div class="search-results"><section><h2>Projets</h2>${projects.filter(match).map(p=>`<a class="recent-message" href="/admin/project-form.html?id=${p.id}">${icon('folder')}<strong>${e(p.title)}</strong></a>`).join('')||empty('Aucun projet trouvé')}</section><section><h2>Clients</h2>${clients.filter(match).map(c=>`<a class="recent-message" href="/admin/clients.html?search=${encodeURIComponent(c.name)}">${icon('user')}<strong>${e(c.name)}</strong><span>${e(c.company)}</span></a>`).join('')||empty('Aucun client trouvé')}</section></div>`);}catch(error){toast(error.message,true);}});
@@ -44,7 +45,7 @@ if(page==='login') {
   if(error.status===401)location.replace('/admin/login.html');else errorState(document.querySelector('#admin-content'),error,()=>location.reload());
  }
 }
-function updateUnread(data){const b=document.querySelector('#unread-badge');b.textContent=data.unread;b.hidden=!Number(data.unread);}
+function updateUnread(data){const b=document.querySelector('#unread-badge');if(!b)return;b.textContent=data.unread;b.hidden=!Number(data.unread);}
 function titleRow(ic,title,description='',link=''){return `<div class="panel-title">${icon(ic)}<div><h2>${title}</h2>${description?`<p>${description}</p>`:''}</div>${link?`<a class="text-link" href="${link}">Voir tous ${icon('arrow-right')}</a>`:''}</div>`;}
 async function dashboard(){
  charts.forEach(chart=>chart.destroy());charts=[];
