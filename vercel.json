@@ -4,10 +4,7 @@
   "installCommand": "npm ci --omit=dev --no-audit --no-fund",
   "functions": {
     "index.js": {
-      "includeFiles": [
-        "frontend/**",
-        "backend/uploads/**"
-      ]
+      "includeFiles": "{frontend/**,backend/uploads/**}"
     }
   }
 }
