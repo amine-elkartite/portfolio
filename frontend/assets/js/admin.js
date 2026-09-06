@@ -35,7 +35,7 @@ if(page==='login') {
  document.querySelector('#global-search').addEventListener('submit',async event=>{event.preventDefault();const query=event.currentTarget.elements.q.value.trim();if(!query)return;try{const [projects,clients]=await Promise.all([apiGet('/projects/manage'),apiGet('/clients')]);const match=row=>Object.values(row).join(' ').toLocaleLowerCase().includes(query.toLocaleLowerCase());openDialog(`<h2>Résultats pour « ${e(query)} »</h2><div class="search-results"><section><h2>Projets</h2>${projects.filter(match).map(p=>`<a class="recent-message" href="/admin/project-form.html?id=${p.id}">${icon('folder')}<strong>${e(p.title)}</strong></a>`).join('')||empty('Aucun projet trouvé')}</section><section><h2>Clients</h2>${clients.filter(match).map(c=>`<a class="recent-message" href="/admin/clients.html?search=${encodeURIComponent(c.name)}">${icon('user')}<strong>${e(c.name)}</strong><span>${e(c.company)}</span></a>`).join('')||empty('Aucun client trouvé')}</section></div>`);}catch(error){toast(error.message,true);}});
  try {
   const currentUser=await apiGet('/auth/me');applyAvatar(currentUser.avatar);
-  if(page==='profile')await (await import('./profile.js')).renderProfile(currentUser);
+  if(page==='profile')await (await import('./profile.js?v=20260906')).renderProfile(currentUser);
   if(page==='dashboard'||page==='statistics')await dashboard();
   else if(page==='project-form')await projectPage();
   else if(page==='settings')await settingsPage();
