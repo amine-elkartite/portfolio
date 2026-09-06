@@ -15,17 +15,38 @@ const fallback = {
 export const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const absolute = (value, base) => { try { return new URL(value, base).href; } catch { return base; } };
 export const xmlEscape = value => escapeHTML(value).replace(/&#39;/g,'&apos;');
+const isMissingTableError = error => error?.code === 'ER_NO_SUCH_TABLE' || Number(error?.errno) === 1146;
 
 export async function getSeoSettings() {
-  const [rows] = await pool.query('SELECT * FROM seo_settings ORDER BY id LIMIT 1');
-  const settings={...fallback,...rows[0]};
-  if(!settings.google_analytics_id)settings.google_analytics_id=process.env.GA_MEASUREMENT_ID || '';
-  return settings;
+  try {
+    const [rows] = await pool.query('SELECT * FROM seo_settings ORDER BY id LIMIT 1');
+    const settings={...fallback,...rows[0]};
+    if(!settings.google_analytics_id)settings.google_analytics_id=process.env.GA_MEASUREMENT_ID || '';
+    return settings;
+  } catch (error) {
+    if (!isMissingTableError(error)) throw error;
+    return {...fallback};
+  }
 }
 
 export async function getPageSeo(pageKey) {
-  const [rows] = await pool.execute('SELECT * FROM page_seo WHERE page_key = ?', [pageKey]);
-  return rows[0] || {};
+  try {
+    const [rows] = await pool.execute('SELECT * FROM page_seo WHERE page_key = ?', [pageKey]);
+    return rows[0] || {};
+  } catch (error) {
+    if (!isMissingTableError(error)) throw error;
+    return {};
+  }
+}
+
+async function getSocialUrls() {
+  try {
+    const [rows] = await pool.query("SELECT setting_key,setting_value FROM settings WHERE setting_key IN ('linkedin_url','github_url','instagram_url')");
+    return rows.map(row=>row.setting_value).filter(Boolean);
+  } catch (error) {
+    if (!isMissingTableError(error)) throw error;
+    return [];
+  }
 }
 
 function jsonScript(data) {
@@ -58,8 +79,7 @@ export async function renderPublicPage(pageKey) {
   const description = page.seo_description || settings.default_description;
   const canonical = absolute(page.canonical_url || paths[pageKey],base+'/');
   const image = absolute(page.og_image || settings.default_og_image,base+'/');
-  const [settingsRows,html] = await Promise.all([pool.query("SELECT setting_key,setting_value FROM settings WHERE setting_key IN ('linkedin_url','github_url','instagram_url')"),readFile(frontend+pageFiles[pageKey],'utf8')]);
-  const socials = settingsRows[0].map(row=>row.setting_value).filter(Boolean);
+  const [socials,html] = await Promise.all([getSocialUrls(),readFile(frontend+pageFiles[pageKey],'utf8')]);
   const person = {'@context':'https://schema.org','@type':'Person',name:'Amine ELKARTITE',url:base,image:absolute('/assets/images/profile.webp',base+'/'),jobTitle:'Full-Stack Developer',email:'mailto:amineelkartite@gmail.com',telephone:'+212704879403',address:{'@type':'PostalAddress',addressCountry:'MA'},knowsAbout:['HTML5','CSS3','JavaScript','Node.js','Express.js','PHP','Laravel','MySQL','MongoDB','React','Next.js','Web Development','REST APIs'],...(socials.length?{sameAs:socials}:{})};
   const website = {'@context':'https://schema.org','@type':'WebSite',name:`${settings.site_name} Portfolio`,url:base,inLanguage:'fr-FR'};
   const service = {'@context':'https://schema.org','@type':'ProfessionalService',name:'Amine ELKARTITE - Développement Web',url:base,email:'amineelkartite@gmail.com',telephone:'+212704879403',areaServed:{'@type':'Country',name:'Morocco'},description:settings.default_description};
