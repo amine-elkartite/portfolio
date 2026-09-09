@@ -1,4 +1,5 @@
 import {apiGet,escapeHTML as e,icon,icons,errorState,openDialog,initDialog,safeURL} from './api.js';
+import './analytics.js';
 icons();initDialog();
 const menu=document.querySelector('.menu-toggle'), nav=document.querySelector('#navigation');
 menu?.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');nav.classList.toggle('open',open);});
