@@ -10,5 +10,8 @@ try {
  await conn.changeUser({database});
  let sql=await readFile(new URL('../../database/portfolio.sql',import.meta.url),'utf8');
  sql=sql.replace(/^CREATE DATABASE.*;$/m,'').replace(/^USE portfolio_db;$/m,'');
- await conn.query(sql);console.log(`Base ${database} initialisée. Les données existantes sont conservées.`);
+ await conn.query(sql);
+ const mobileMigration=await readFile(new URL('../../database/migrations/001_mobile_admin.sql',import.meta.url),'utf8');
+ await conn.query(mobileMigration);
+ console.log(`Base ${database} initialisée. Les données existantes sont conservées.`);
 } finally {await conn.end();await pool.end();}
