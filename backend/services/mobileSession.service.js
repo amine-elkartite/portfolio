@@ -29,7 +29,7 @@ export async function createOrReplaceMobileSession({userId,deviceId,deviceName,p
 
 export async function findSessionByCredential(value){
   const hash=hashCredential(value);
-  const [rows]=await pool.execute(`SELECT ms.*,u.name,u.email,u.role,u.token_version FROM mobile_sessions ms JOIN users u ON u.id=ms.user_id
+  const [rows]=await pool.execute(`SELECT ms.*,u.id AS account_id,u.name,u.email,u.role,u.token_version FROM mobile_sessions ms JOIN users u ON u.id=ms.user_id
     WHERE ms.refresh_token_hash=? AND ms.revoked_at IS NULL AND ms.expires_at>NOW() LIMIT 1`,[hash]);
   return rows[0];
 }
