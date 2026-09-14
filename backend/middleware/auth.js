@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import {findMobileSession} from '../models/MobileSession.js';
 
 export function getCookie(req, name) {
   const entry = (req.headers.cookie || '').split(';').map(x => x.trim()).find(x => x.startsWith(name + '='));
@@ -17,12 +18,14 @@ export async function verifyToken(req, res, next) {
     const payload = jwt.verify(token, process.env.JWT_SECRET, {algorithms:['HS256'], issuer:'amine-portfolio', audience:allowedAudiences});
     const user = await User.byId(payload.sub);
     if (!user || user.role !== 'admin' || user.token_version !== payload.version) return res.status(401).json({success:false,message:'Session expirée.'});
+    const sessionId=payload.sid ? Number(payload.sid) : null;
+    if(payload.aud==='portfolio-mobile-admin'){
+      if(!sessionId)return res.status(401).json({success:false,message:'Session mobile invalide.'});
+      const session=await findMobileSession(sessionId,user.id);
+      if(!session||session.revoked_at||new Date(session.expires_at).getTime()<=Date.now())return res.status(401).json({success:false,message:'Session mobile expirée ou révoquée.'});
+    }
     req.user = user;
-    req.auth={
-      audience:payload.aud,
-      sessionId:payload.sid ? Number(payload.sid) : null,
-      tokenType:bearer ? 'bearer' : 'cookie'
-    };
+    req.auth={audience:payload.aud,sessionId,tokenType:bearer ? 'bearer' : 'cookie'};
     next();
   } catch (error) {
     if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') return res.status(401).json({success:false,message:'Session expirée.'});
