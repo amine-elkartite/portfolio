@@ -7,13 +7,14 @@ import {ok} from './crud.controller.js';
 
 const dummyHash=await bcrypt.hash('mobile-timing-protection-not-a-password',12);
 
-function publicUser(user){return {id:user.id,name:user.name,email:user.email,role:user.role};}
+function accountId(user){return user.account_id??user.user_id??user.id;}
+function publicUser(user){return {id:accountId(user),name:user.name,email:user.email,role:user.role};}
 function publicSession(session){
   if(!session)return null;
   return {id:session.id,deviceId:session.device_id,deviceName:session.device_name,platform:session.platform,biometricEnabled:Boolean(session.biometric_enabled),notificationsEnabled:Boolean(session.notifications_enabled),createdAt:session.created_at,lastUsedAt:session.last_used_at,expiresAt:session.expires_at,revokedAt:session.revoked_at};
 }
 function signAccessToken(user,sessionId){
-  return jwt.sign({version:user.token_version,sid:String(sessionId)},process.env.JWT_SECRET,{algorithm:'HS256',subject:String(user.id),issuer:'amine-portfolio',audience:'portfolio-mobile-admin',expiresIn:MOBILE_ACCESS_TTL});
+  return jwt.sign({version:user.token_version,sid:String(sessionId)},process.env.JWT_SECRET,{algorithm:'HS256',subject:String(accountId(user)),issuer:'amine-portfolio',audience:'portfolio-mobile-admin',expiresIn:MOBILE_ACCESS_TTL});
 }
 
 export async function mobileLogin(req,res){
