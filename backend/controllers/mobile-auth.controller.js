@@ -31,8 +31,10 @@ export async function mobileRefresh(req,res){
   const session=await findSessionByCredential(req.validated.refreshToken);
   if(!session||session.role!=='admin')return res.status(401).json({success:false,message:'Session mobile expirée.'});
   if(req.validated.deviceId&&session.device_id!==req.validated.deviceId)return res.status(401).json({success:false,message:'Session mobile invalide.'});
+  const previousHash=hashCredential(req.validated.refreshToken);
   const nextRefreshToken=createOpaqueCredential();
-  await rotateMobileSession(session.id,hashCredential(nextRefreshToken),mobileSessionExpiry());
+  const rotated=await rotateMobileSession(session.id,previousHash,hashCredential(nextRefreshToken),mobileSessionExpiry());
+  if(!rotated)return res.status(401).json({success:false,message:'Session mobile déjà renouvelée. Reconnectez-vous.'});
   const accessToken=signAccessToken(session,session.id);
   return ok(res,{accessToken,refreshToken:nextRefreshToken,expiresIn:900,user:publicUser(session),session:publicSession(await findMobileSession(session.id,session.user_id))});
 }
