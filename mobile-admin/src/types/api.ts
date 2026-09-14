@@ -1,0 +1,17 @@
+export type ApiResponse<T>={success:boolean;message?:string;data:T;errors?:Array<{field:string;message:string}>};
+export type User={id:number;name:string;email:string;role:'admin'};
+export type MobileSession={id:number;deviceId:string;deviceName:string;platform:'android'|'ios'|'unknown';biometricEnabled:boolean;notificationsEnabled:boolean;createdAt:string;lastUsedAt:string|null;expiresAt:string;revokedAt:string|null;current?:boolean};
+export type MobileAuthPayload={accessToken:string;refreshToken:string;expiresIn:number;user:User;session:MobileSession};
+export type Project={id:number;title:string;slug:string;description:string;long_description?:string|null;thumbnail?:string|null;category:string;technologies:string[]|string;github_url?:string|null;live_url?:string|null;status:'draft'|'published'|'in_progress'|'completed';featured:boolean|number;seo_title?:string|null;seo_description?:string|null;og_image?:string|null;created_at:string;updated_at:string};
+export type Service={id:number;title:string;description:string;icon:string;order_position:number;active:boolean|number;created_at:string;updated_at:string};
+export type Skill={id:number;name:string;category:string;percentage:number;icon?:string|null;order_position:number;created_at:string;updated_at:string};
+export type Message={id:number;name:string;email:string;subject:string;message:string;status:'unread'|'read'|'replied';created_at:string};
+export type Client={id:number;name:string;company?:string|null;email:string;phone?:string|null;notes?:string|null;created_at:string};
+export type Task={id:number;title:string;description?:string|null;status:'todo'|'in_progress'|'done';priority:'low'|'medium'|'high';due_date?:string|null;created_at:string};
+export type Quote={id:number;number:string;client_id?:number|null;title:string;amount:number;status:'draft'|'sent'|'accepted'|'rejected';due_date?:string|null;notes?:string|null;created_at:string};
+export type Invoice={id:number;number:string;client_id?:number|null;title:string;amount:number;status:'draft'|'sent'|'paid'|'overdue';due_date?:string|null;paid_at?:string|null;notes?:string|null;created_at:string};
+export type DashboardStats={projects:number;clients:number;revenue:number;completed:number;unread:number;distribution:Array<{category:string;count:number}>;revenue_history:Array<{month:string;amount:number}>;recent_projects:Project[];recent_messages:Message[];today_tasks:Task[]};
+export type NotificationPreferences={notificationsEnabled:boolean;sound:boolean;vibration:boolean;badge:boolean;showSenderName:boolean;pushRegistered:boolean};
+export type NotificationType='NEW_MESSAGE'|'SECURITY_ALERT';
+export type NotificationPayload={type:NotificationType;messageId?:number};
+export type Settings={availability:string|boolean;linkedin_url?:string;github_url?:string;instagram_url?:string;seo?:Record<string,unknown>;pages?:Array<Record<string,unknown>>;[key:string]:unknown};
