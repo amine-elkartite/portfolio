@@ -9,4 +9,6 @@ portfolio/backend/uploads/projects/*
 test-results/
 playwright-report/
 .vercel/
+.expo/
+mobile-admin/.expo/
 .local-admin.txt
