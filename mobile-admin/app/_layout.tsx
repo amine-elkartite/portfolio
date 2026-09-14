@@ -23,9 +23,11 @@ function Navigation(){
       <Stack.Screen name="resource/[resource]/index" options={{title:'Manage'}}/>
       <Stack.Screen name="resource/[resource]/[id]" options={{title:'Edit'}}/>
       <Stack.Screen name="settings/index" options={{title:'Settings'}}/>
+      <Stack.Screen name="settings/general" options={{title:'Website & Social'}}/>
       <Stack.Screen name="settings/security" options={{title:'Security'}}/>
       <Stack.Screen name="settings/notifications" options={{title:'Notifications'}}/>
       <Stack.Screen name="settings/appearance" options={{title:'Appearance'}}/>
+      <Stack.Screen name="settings/about" options={{title:'About'}}/>
       <Stack.Screen name="profile" options={{title:'Profile'}}/>
       <Stack.Screen name="statistics" options={{title:'Statistics'}}/>
       <Stack.Screen name="seo" options={{title:'SEO'}}/>
