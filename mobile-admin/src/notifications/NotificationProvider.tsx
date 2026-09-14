@@ -40,7 +40,7 @@ export function NotificationProvider({children}:{children:React.ReactNode}){
   },[]);
 
   useEffect(()=>{
-    void refreshPermission();
+    void Notifications.getPermissionsAsync().then(current=>setPermission(current.status));
     if(Platform.OS==='android')void Notifications.setNotificationChannelAsync('portfolio-messages',{name:'Portfolio messages',importance:Notifications.AndroidImportance.HIGH,vibrationPattern:[0,250,250,250],sound:'default'});
     const received=Notifications.addNotificationReceivedListener(notification=>{
       const payload=parsePayload(notification.request.content.data);
@@ -53,7 +53,7 @@ export function NotificationProvider({children}:{children:React.ReactNode}){
     const response=Notifications.addNotificationResponseReceivedListener(event=>navigatePayload(parsePayload(event.notification.request.content.data)));
     void Notifications.getLastNotificationResponseAsync().then(last=>{if(last)navigatePayload(parsePayload(last.notification.request.content.data));});
     return()=>{received.remove();response.remove();};
-  },[navigatePayload,refreshPermission]);
+  },[navigatePayload]);
 
   useEffect(()=>{
     if(authenticated&&pendingMessage.current){const id=pendingMessage.current;pendingMessage.current=null;router.push(`/messages/${id}`);}
