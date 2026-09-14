@@ -1,0 +1,55 @@
+name: Android Preview APK
+
+on:
+  push:
+    branches: [feature/mobile-admin-app]
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    env:
+      CI: "1"
+      EXPO_PUBLIC_API_BASE_URL: https://amine-elkartite-git-feature-mobi-49cae5-amineelkartite-projects.vercel.app/api
+    defaults:
+      run:
+        working-directory: mobile-admin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install dependencies
+        run: npm install
+      - name: Validate mobile app
+        run: |
+          npx expo install --check
+          npm run typecheck
+          npm run lint
+          npx expo-doctor
+      - name: Generate Android project
+        run: npx expo prebuild --platform android --clean
+      - name: Build release APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon
+      - name: Prepare APK
+        run: cp android/app/build/outputs/apk/release/app-release.apk portfolio-admin.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-admin-apk
+          path: mobile-admin/portfolio-admin.apk
+          if-no-files-found: error
+      - name: Publish APK release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view mobile-admin-preview --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || gh release create mobile-admin-preview --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Portfolio Admin Android Preview" --prerelease --notes "Installable Android preview of Portfolio Admin."
+          gh release upload mobile-admin-preview portfolio-admin.apk --repo "$GITHUB_REPOSITORY" --clobber
