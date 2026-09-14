@@ -1,12 +1,15 @@
 import {Router} from 'express';
 import {body} from 'express-validator';
 import rateLimit from 'express-rate-limit';
-import {controller,submit,status} from '../controllers/message.controller.js';
+import {controller,submit,status,getOne,unreadCount} from '../controllers/message.controller.js';
 import {verifyToken} from '../middleware/auth.js';
 import {schemas,idRule,validate} from '../middleware/validation.js';
 const router=Router();
 router.post('/',rateLimit({windowMs:60*60*1000,limit:10,standardHeaders:'draft-8',legacyHeaders:false,message:{success:false,message:'Trop de messages. Veuillez réessayer dans une heure.'}}),schemas.messages,validate,submit);
-router.use(verifyToken); router.get('/',controller.list);
+router.use(verifyToken);
+router.get('/',controller.list);
+router.get('/unread-count',unreadCount);
+router.get('/:id',idRule,validate,getOne);
 router.patch('/:id/status',idRule,body('status').isIn(['unread','read','replied']),validate,status);
 router.delete('/:id',idRule,validate,controller.remove);
 export default router;
