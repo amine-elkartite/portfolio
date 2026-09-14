@@ -8,6 +8,7 @@ import {errorHandler} from './middleware/errorHandler.js';
 import {stats} from './controllers/dashboard.controller.js';
 import {pool,databaseDiagnostics} from './config/database.js';
 import authRoutes from './routes/auth.routes.js';
+import mobileAuthRoutes from './routes/mobile-auth.routes.js';
 import projectsRoutes from './routes/projects.routes.js';
 import servicesRoutes from './routes/services.routes.js';
 import skillsRoutes from './routes/skills.routes.js';
@@ -34,13 +35,14 @@ app.get('/api/health',async(req,res)=>{
  try{
   const [[dbRows],[tableRows]]=await Promise.all([
    pool.query('SELECT DATABASE() AS database_name'),
-   pool.query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME IN ('users','projects','settings','seo_settings','page_seo') ORDER BY TABLE_NAME")
+   pool.query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME IN ('users','projects','settings','seo_settings','page_seo','mobile_sessions') ORDER BY TABLE_NAME")
   ]);
   res.json({success:true,data:{status:'ok',database:dbRows[0]?.database_name||null,tables:tableRows.map(row=>row.TABLE_NAME),connection:databaseDiagnostics}});
  }catch(error){
   res.status(503).json({success:false,message:'Connexion à la base de données indisponible.',code:error.code||'DB_ERROR',data:{connection:databaseDiagnostics}});
  }
 });
+app.use('/api/auth/mobile',mobileAuthRoutes);
 app.use('/api/auth',authRoutes);
 app.use('/api/projects',projectsRoutes);
 app.use('/api/services',servicesRoutes);
