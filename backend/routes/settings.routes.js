@@ -45,6 +45,13 @@ router.put('/password',body('current_password').isString().isLength({min:1,max:7
  const [rows]=await pool.execute('SELECT password FROM users WHERE id=?',[req.user.id]);
  if(!await bcrypt.compare(req.validated.current_password,rows[0].password))return res.status(422).json({success:false,message:'Mot de passe actuel incorrect.'});
  const hash=await bcrypt.hash(req.validated.new_password,12);
- await pool.execute('UPDATE users SET password=?,token_version=token_version+1 WHERE id=?',[hash,req.user.id]);res.clearCookie('portfolio_session',{path:'/api'});ok(res,null,'Mot de passe changé. Reconnectez-vous.');
+ const conn=await pool.getConnection();
+ try{
+  await conn.beginTransaction();
+  await conn.execute('UPDATE users SET password=?,token_version=token_version+1 WHERE id=?',[hash,req.user.id]);
+  try{await conn.execute('UPDATE mobile_sessions SET revoked_at=NOW(),push_token=NULL WHERE user_id=? AND revoked_at IS NULL',[req.user.id]);}catch(error){if(error.code!=='ER_NO_SUCH_TABLE')throw error;}
+  await conn.commit();
+ }catch(error){await conn.rollback();throw error;}finally{conn.release();}
+ res.clearCookie('portfolio_session',{path:'/api'});ok(res,null,'Mot de passe changé. Reconnectez-vous.');
 });
 export default router;
