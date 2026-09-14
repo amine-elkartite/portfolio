@@ -1,0 +1,75 @@
+name: Mobile Admin CI
+
+on:
+  push:
+    branches: [feature/mobile-admin-app]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend-integration:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: portfolio_db
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: portfolio_db
+      JWT_SECRET: ci-only-jwt-secret-7b706c67c3a443c39fd1f16bf4f4e8b1
+      FRONTEND_URL: http://127.0.0.1:5000
+      TEST_BASE_URL: http://127.0.0.1:5000
+      ADMIN_PASSWORD: TestOnly-Portfolio-Admin-2026!
+      TEST_ADMIN_PASSWORD: TestOnly-Portfolio-Admin-2026!
+      NODE_ENV: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run db:init
+      - run: npm run admin:create
+      - name: Start API
+        run: |
+          npm start > /tmp/portfolio-api.log 2>&1 &
+          echo $! > /tmp/portfolio-api.pid
+          for i in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:5000/api/health > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/portfolio-api.log
+          exit 1
+      - run: npm test
+      - name: Print server log on failure
+        if: failure()
+        run: cat /tmp/portfolio-api.log || true
+
+  mobile-static:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile-admin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm install
+      - run: npx expo install --check
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npx expo-doctor
