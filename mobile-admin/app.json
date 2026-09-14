@@ -10,15 +10,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.amineelkartite.portfolioadmin",
-      "infoPlist": {
-        "NSFaceIDUsageDescription": "Use Face ID to securely unlock Portfolio Admin."
-      }
+      "infoPlist": {"NSFaceIDUsageDescription": "Use Face ID to securely unlock Portfolio Admin."}
     },
     "android": {
       "package": "com.amineelkartite.portfolioadmin",
-      "adaptiveIcon": {
-        "backgroundColor": "#0B0D10"
-      },
+      "adaptiveIcon": {"backgroundColor": "#0B0D10"},
       "permissions": ["USE_BIOMETRIC", "USE_FINGERPRINT", "POST_NOTIFICATIONS"]
     },
     "plugins": [
@@ -27,7 +23,6 @@
       ["expo-secure-store", {"configureAndroidBackup": true, "faceIDPermission": "Use Face ID to access the secure Portfolio Admin session."}],
       "expo-notifications",
       ["expo-image-picker", {"photosPermission": "Allow Portfolio Admin to select project images.", "cameraPermission": "Allow Portfolio Admin to take project images."}]
-    ],
-    "experiments": {"typedRoutes": true}
+    ]
   }
 }
