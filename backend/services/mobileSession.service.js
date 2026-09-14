@@ -34,8 +34,9 @@ export async function findSessionByCredential(value){
   return rows[0];
 }
 
-export async function rotateMobileSession(id,newHash,expiresAt){
-  await pool.execute('UPDATE mobile_sessions SET refresh_token_hash=?,expires_at=?,last_used_at=NOW() WHERE id=? AND revoked_at IS NULL',[newHash,expiresAt,id]);
+export async function rotateMobileSession(id,previousHash,newHash,expiresAt){
+  const [result]=await pool.execute('UPDATE mobile_sessions SET refresh_token_hash=?,expires_at=?,last_used_at=NOW() WHERE id=? AND refresh_token_hash=? AND revoked_at IS NULL AND expires_at>NOW()',[newHash,expiresAt,id,previousHash]);
+  return result.affectedRows===1;
 }
 
 export async function revokeSessionByCredential(value){
